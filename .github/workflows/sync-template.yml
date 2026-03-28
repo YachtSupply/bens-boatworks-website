@@ -1,0 +1,80 @@
+name: Notify Orchestrator of Template Update
+
+# This workflow replaces the previous sync-template.yml that directly synced
+# files to contractor repos. Sync logic now lives in the boatwork-orchestrator
+# service. This workflow simply notifies the orchestrator that a new version
+# is available, as a backup to the GitHub webhook (which is the primary trigger).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force sync for all subscribers'
+        required: false
+        type: boolean
+        default: false
+      target_contractor:
+        description: 'Sync to a single contractor slug (leave blank for all)'
+        required: false
+        type: string
+        default: ''
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    if: "contains(github.event.head_commit.message, '[auto-version]') || github.event_name == 'workflow_dispatch'"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read template metadata
+        id: meta
+        run: |
+          VERSION=$(jq -r '.templateVersion' .boatwork-template)
+          SLUG=$(jq -r '.templateSlug // "marine-pro"' .boatwork-template)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "slug=$SLUG" >> $GITHUB_OUTPUT
+          echo "Template: $SLUG v$VERSION"
+
+      - name: Notify orchestrator
+        env:
+          ORCHESTRATOR_URL: ${{ secrets.ORCHESTRATOR_URL }}
+          ORCHESTRATOR_API_SECRET: ${{ secrets.ORCHESTRATOR_API_SECRET }}
+        run: |
+          if [ -z "$ORCHESTRATOR_URL" ]; then
+            echo "::warning::ORCHESTRATOR_URL not configured — skipping notification"
+            echo "The boatwork-orchestrator will still pick up changes via GitHub webhook."
+            exit 0
+          fi
+
+          TEMPLATE_SLUG="${{ steps.meta.outputs.slug }}"
+          FORCE="${{ inputs.force }}"
+          TARGET="${{ inputs.target_contractor }}"
+
+          # Build request body
+          BODY="{\"templateSlug\": \"$TEMPLATE_SLUG\""
+          if [ "$FORCE" = "true" ]; then
+            BODY="$BODY, \"force\": true"
+          fi
+          if [ -n "$TARGET" ]; then
+            BODY="$BODY, \"contractorSlug\": \"$TARGET\""
+          fi
+          BODY="$BODY}"
+
+          echo "Notifying orchestrator: $BODY"
+
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "$ORCHESTRATOR_URL/api/sync" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $ORCHESTRATOR_API_SECRET" \
+            -d "$BODY")
+
+          if [ "$HTTP_STATUS" -ge 200 ] && [ "$HTTP_STATUS" -lt 300 ]; then
+            echo "Orchestrator notified successfully (HTTP $HTTP_STATUS)"
+          elif [ "$HTTP_STATUS" = "000" ]; then
+            echo "::warning::Could not reach orchestrator — sync will be triggered by GitHub webhook"
+          else
+            echo "::warning::Orchestrator returned HTTP $HTTP_STATUS — sync may be handled by webhook"
+          fi
