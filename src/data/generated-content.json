@@ -41,6 +41,27 @@
       "Gulf Coast",
       "Caribbean"
     ],
-    "serviceAreaTitle": "Our Service Area"
-  }
+    "serviceAreaTitle": "Our Service Area",
+    "reviewSynopsis": {
+      "aggregateRating": 4.3,
+      "totalReviewCount": 466,
+      "boatworkReviewCount": 1,
+      "googleReviewCount": 465,
+      "summary": "Our clients trust us to solve the tough problems that other shops can't, like complex fuel injection issues on large vessels that have stumped other mechanics. We take pride in showing up when we say we will, offering fair pricing, and delivering results that leave boats running better than ever. The satisfaction our customers feel is clear in the word-of-mouth referrals we receive from marina communities.",
+      "keywords": [
+        "fuel injection repair",
+        "diesel diagnostics",
+        "Viking yacht service",
+        "reliable marine mechanic",
+        "fair pricing",
+        "complex engine repair",
+        "marina recommended"
+      ],
+      "sources": [
+        "boatwork",
+        "google"
+      ]
+    }
+  },
+  "synopsisUpdatedAt": "2026-04-08T13:20:24.498Z"
 }
