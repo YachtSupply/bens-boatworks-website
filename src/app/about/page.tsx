@@ -1,8 +1,7 @@
 export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { GiAnchor } from 'react-icons/gi';
-import { FiArrowRight, FiMapPin } from 'react-icons/fi';
+import { FiArrowRight, FiMapPin, FiStar } from 'react-icons/fi';
 import { getSiteData } from '@/lib/siteData';
 import { SectionWrapper, BoatworkVerifiedBadge, SmartLogo } from '@/components/shared';
 
@@ -44,9 +43,9 @@ function formatAbout(text: string) {
     <div className="mb-6">
       <p className="text-text font-sans leading-relaxed mb-4">{first}</p>
       <details className="group">
-        <summary className="cursor-pointer list-none text-gold font-sans text-sm font-semibold uppercase tracking-widest hover:text-gold-light transition-colors mb-3 inline-block border-b border-gold/40 pb-0.5 select-none">
-          <span className="group-open:hidden">Read more</span>
-          <span className="hidden group-open:inline">Show less</span>
+        <summary className="cursor-pointer list-none text-gold font-sans text-sm font-semibold hover:text-gold-dark transition-colors mb-3 inline-block select-none">
+          <span className="group-open:hidden">Read more &darr;</span>
+          <span className="hidden group-open:inline">Show less &uarr;</span>
         </summary>
         <div className="about-accordion overflow-hidden transition-[max-height] duration-300 ease-in-out">
           {rest.map((p, i) => (
@@ -75,72 +74,69 @@ export default async function AboutPage() {
       {/* Hero */}
       <section className="bg-hero-gradient text-white py-24 px-4 text-center">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={18} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h1 className="font-serif text-5xl font-bold mb-4">{siteConfig.name}</h1>
-          <p className="text-gold-light font-serif text-xl italic mb-4">{siteConfig.tagline}</p>
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h1 className="font-heading text-5xl font-extrabold mb-4 tracking-tight">{siteConfig.name}</h1>
+          <p className="text-white/60 font-sans text-lg mb-4">{siteConfig.tagline}</p>
           {siteConfig.yearEstablished && (
-            <p className="text-slate-300 font-sans text-sm uppercase tracking-widest">
+            <p className="accent-badge inline-flex" style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)' }}>
               Serving {siteConfig.city} since {siteConfig.yearEstablished}
             </p>
           )}
         </div>
       </section>
 
-      <div className="gold-rule-full" />
-
       {/* About content */}
       <SectionWrapper variant="white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="h-px w-8 bg-gold/60" />
-              <span className="text-gold text-xs font-sans font-semibold uppercase tracking-widest">Our Story</span>
-            </div>
-            <h2 className="font-serif text-4xl font-bold text-navy mb-6">About Our Business</h2>
+            <div className="section-divider mb-5" />
+            <h2 className="font-heading text-4xl font-extrabold text-navy mb-6 tracking-tight">Our Story</h2>
             {siteConfig.yearEstablished && (
-              <p className="text-gold font-sans text-sm font-semibold uppercase tracking-widest mb-4">
-                Serving {siteConfig.city} since {siteConfig.yearEstablished}
+              <p className="accent-badge mb-5">
+                Est. {siteConfig.yearEstablished}
               </p>
             )}
             {formatAbout(siteConfig.about)}
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 whitespace-nowrap bg-navy text-white font-sans font-semibold px-8 py-4 hover:bg-navy/80 transition-colors uppercase tracking-widest text-sm mt-2"
+              className="btn-gold inline-flex items-center gap-2 px-6 py-3 mt-2 whitespace-nowrap"
             >
-              Get a Quote <FiArrowRight size={14} className="flex-shrink-0 inline-block" />
+              Get a Quote <FiArrowRight size={14} />
             </Link>
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Logo + badge panel */}
-            <div className="bg-cream border border-cream-dark p-8 flex flex-col items-center text-center">
+            <div className="bg-cream rounded-2xl p-8 flex flex-col items-center text-center">
               <div className="mb-6">
                 <SmartLogo
                   src={siteConfig.logoUrl}
                   alt={siteConfig.name}
                   size={120}
                   fallbackInitial={siteConfig.name.charAt(0)}
-                  fallbackClassName="bg-navy text-white"
+                  className="rounded-2xl"
+                  fallbackClassName="bg-navy text-white rounded-2xl"
                 />
               </div>
               {reviews.length > 0 ? (
                 <>
-                  <div className="flex mb-3">
+                  <div className="flex gap-1 mb-3">
                     {[1,2,3,4,5].map((i) => (
-                      <span key={i} className={`text-xl ${i <= Math.round(avgRating) ? 'text-gold' : 'text-gray-300'}`}>★</span>
+                      <FiStar
+                        key={i}
+                        size={18}
+                        className={i <= Math.round(avgRating) ? 'text-gold fill-gold' : 'text-cream-dark'}
+                        strokeWidth={i <= Math.round(avgRating) ? 0 : 1.5}
+                      />
                     ))}
                   </div>
-                  <p className="font-serif text-lg text-navy mb-2">{avgRating.toFixed(1)} Star Rated on Boatwork</p>
-                  <p className="text-text-light font-sans text-sm mb-6">Verified reviews from real boat owners</p>
+                  <p className="font-heading text-lg font-bold text-navy mb-1">{avgRating.toFixed(1)} Star Rated</p>
+                  <p className="text-text-light font-sans text-sm mb-6">Verified reviews from real boat&nbsp;owners</p>
                 </>
               ) : (
                 <>
-                  <p className="font-serif text-lg text-navy mb-2">New on Boatwork</p>
-                  <p className="text-text-light font-sans text-sm mb-6">No reviews yet — be one of the first</p>
+                  <p className="font-heading text-lg font-bold text-navy mb-1">New on Boatwork</p>
+                  <p className="text-text-light font-sans text-sm mb-6">No reviews yet</p>
                 </>
               )}
               <BoatworkVerifiedBadge
@@ -154,45 +150,36 @@ export default async function AboutPage() {
             </div>
 
             {/* Service area */}
-            <div className="bg-cream border border-cream-dark p-8">
-              <div className="flex items-center gap-3 mb-4">
+            <div className="bg-cream rounded-2xl p-8">
+              <div className="flex items-center gap-2.5 mb-4">
                 <FiMapPin className="text-gold" size={18} />
-                <span className="text-gold text-xs font-sans font-semibold uppercase tracking-widest">Coverage Area</span>
+                <span className="font-heading font-bold text-navy">Service Area</span>
               </div>
-              <h3 className="font-serif text-xl font-bold text-navy mb-4">{siteConfig.serviceAreaTitle}</h3>
               <p className="text-text-light font-sans text-sm mb-4">{siteConfig.serviceAreaDescription}</p>
-              <ul className="space-y-2">
+              <div className="flex flex-wrap gap-2">
                 {siteConfig.serviceArea.map((a) => (
-                  <li key={a} className="flex items-center gap-3 font-sans text-text text-sm">
-                    <span className="w-1.5 h-1.5 bg-gold rounded-full flex-shrink-0" />
-                    <span>{a}</span>
-                  </li>
+                  <span key={a} className="text-xs font-sans font-medium text-text bg-white px-3 py-1.5 rounded-lg">
+                    {a}
+                  </span>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
         </div>
       </SectionWrapper>
 
-      <div className="gold-rule-full" />
-
       {/* CTA */}
       <SectionWrapper variant="navy">
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-gold/40" />
-            <GiAnchor className="text-gold" size={20} />
-            <div className="h-px w-12 bg-gold/40" />
-          </div>
-          <h2 className="font-serif text-4xl font-bold mb-4">Ready to Work Together?</h2>
-          <p className="text-slate-300 font-sans mb-8 max-w-xl mx-auto">
-            Contact our team today to discuss your vessel and get a personalized quote.
+        <div className="text-center py-8">
+          <h2 className="font-heading text-4xl font-extrabold mb-4 tracking-tight">Ready to Work&nbsp;Together?</h2>
+          <p className="text-white/50 font-sans mb-8 max-w-xl mx-auto text-lg">
+            Contact our team today to discuss your vessel and get a personalized&nbsp;quote.
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-gold text-navy font-sans font-bold px-10 py-4 hover:bg-gold-light transition-colors uppercase tracking-widest text-sm whitespace-nowrap"
+            className="btn-gold inline-flex items-center gap-2 px-8 py-4 whitespace-nowrap"
           >
-            Get a Quote
+            Get a Quote <FiArrowRight size={14} />
           </Link>
         </div>
       </SectionWrapper>

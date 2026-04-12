@@ -12,7 +12,7 @@ export function SectionWrapper({ children, variant = 'white', className, id }: S
     white: 'bg-white',
     cream: 'bg-cream',
     navy: 'bg-navy text-white',
-    dark: 'bg-[#0D1F35] text-white',
+    dark: 'bg-[#0c1e2b] text-white',
   };
   return (
     <section id={id} className={clsx('py-20 px-4 sm:px-6 lg:px-8', variants[variant], className)}>

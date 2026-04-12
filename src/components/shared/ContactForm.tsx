@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { FiCheck, FiArrowRight } from 'react-icons/fi';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
@@ -27,14 +28,16 @@ export function ContactForm() {
   };
 
   const inputClass =
-    'w-full bg-cream border border-cream-dark px-4 py-3 text-sm font-sans text-navy focus:outline-none focus:border-gold focus:bg-white transition-all';
-  const labelClass = 'block text-xs font-sans font-semibold uppercase tracking-widest text-navy mb-2';
+    'w-full bg-white border border-cream-dark rounded-xl px-4 py-3 text-sm font-sans text-navy focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/10 transition-all';
+  const labelClass = 'block text-xs font-heading font-bold text-navy mb-2';
 
   if (status === 'success') {
     return (
-      <div className="border border-gold/40 bg-gold/5 p-10 text-center">
-        <div className="text-gold text-4xl mb-4">⚓</div>
-        <h3 className="font-serif text-xl font-semibold text-navy mb-2">Message Received</h3>
+      <div className="bg-gold/5 border border-gold/20 rounded-2xl p-10 text-center">
+        <div className="flex items-center justify-center w-14 h-14 rounded-full bg-gold/10 text-gold mx-auto mb-4">
+          <FiCheck size={28} strokeWidth={3} />
+        </div>
+        <h3 className="font-heading text-xl font-bold text-navy mb-2">Message Received</h3>
         <p className="text-text-light text-sm font-sans">
           Thank you for reaching out. We will be in touch within one business day.
         </p>
@@ -74,13 +77,10 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === 'loading'}
-        className="w-full bg-navy text-white font-sans font-semibold py-4 px-8 border border-gold/30 hover:bg-navy/80 hover:border-gold transition-all uppercase tracking-widest text-sm disabled:opacity-50 whitespace-nowrap"
+        className="btn-gold w-full py-4 px-8 flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
       >
-        {status === 'loading' ? 'Sending...' : 'Send Message'}
+        {status === 'loading' ? 'Sending...' : <>Send Message <FiArrowRight size={14} /></>}
       </button>
-      <p className="text-xs text-text-light text-center font-sans">
-        Your information is kept strictly confidential.
-      </p>
     </form>
   );
 }
