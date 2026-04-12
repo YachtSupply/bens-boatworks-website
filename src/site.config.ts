@@ -6,7 +6,7 @@
 // for each deployed site.
 // ============================================================
 
-export const TEMPLATE_VERSION = '1.1.26';
+export const TEMPLATE_VERSION = '1.1.17';
 
 export type BoatworkEventType =
   | 'profile.updated'
@@ -47,8 +47,8 @@ export const siteConfig = {
 
   // ── Boatwork integration ──────────────────────────────────
   boatwork: {
-    profileSlug: 'bens-boatworks',
-    profileId: 'e9bee299-0a52-4ff0-8b2b-55f218bf6c0f', // UUID — set during provisioning, permanent link to profile
+    profileSlug: 'template',
+    profileId: '', // UUID — set during provisioning, permanent link to profile
     profileUrl: 'https://boatwork.co/pro/template/',
     logoUrl: '/boatwork-logo.svg',
     useLiveReviews: false,
