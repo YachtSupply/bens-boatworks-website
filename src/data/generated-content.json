@@ -1,67 +1,47 @@
 {
-  "updatedAt": "2026-03-28T00:26:11.954Z",
+  "updatedAt": "2026-04-12T16:18:55.517Z",
   "specialtiesKey": "Boat Surveying & Inspection,Diving & Underwater Services,Marine AC & Climate Control,Marine Plumbing & Sanitation",
   "servicesKey": "",
   "contentVersion": "6",
+  "synopsisUpdatedAt": null,
   "content": {
-    "tagline": "Precision Marine Care on the Chesapeake",
-    "about": "Ben's Boatworks is a trusted marine service provider based in Annapolis, Maryland, proudly serving boat owners throughout the Chesapeake Bay region and beyond. We've built our reputation on honest work, careful attention to detail, and the kind of comprehensive vessel care that keeps boats running the way they should — season after season.\n\nOur team handles a wide range of marine services, including professional boat surveying and inspection for pre-purchase evaluations and insurance requirements, diving and underwater services for hull inspections, zinc replacement, and prop work without ever hauling out, marine AC and climate control system installation and repair to keep your cabin comfortable year-round, and marine plumbing and sanitation work covering everything from through-hull fittings to holding tank systems. Whatever your vessel needs, we bring the same level of precision and reliability to every job.\n\nWe serve boat owners across the Annapolis waterfront, the broader Anne Arundel County area, and throughout the Chesapeake Bay — from the upper Bay down through the tributaries and beyond. Whether you're prepping for a new season, dealing with an unexpected repair, or buying a boat and need a thorough inspection before you sign anything, Ben's Boatworks is the crew you can count on. We take your investment seriously, and we treat every vessel like it matters — because to you, it does.",
+    "tagline": "Keeping Your Vessel Running Season After Season",
+    "about": "Ben's Boatworks is a full-service marine facility based in Annapolis, MD, dedicated to keeping your vessel in peak operating condition no matter the season. We offer a comprehensive range of specialized marine services, and we've built a solid reputation among boat owners who need reliable, knowledgeable hands on their boat — not just a quick fix.\n\nOur team handles everything from thorough boat surveying and inspection to diving and underwater services, marine AC and climate control, and marine plumbing and sanitation. Whether you're buying a used vessel and need a pre-purchase survey, dealing with a fouled hull, troubleshooting a chilled water system, or sorting out a holding tank issue, we've got the experience to get it done right. We take these systems seriously because we know how much they matter when you're out on the water.\n\nWe serve boat owners across South Florida and the surrounding coastal communities, working within a 60-mile radius to bring professional marine services directly to your slip or yard. From the marinas along the Chesapeake Bay corridor to the waterways throughout the region, Ben's Boatworks is the crew you can count on. Your boat represents a significant investment, and we treat it that way — with the attention, care, and expertise it deserves.",
     "seoTitle": "Ben's Boatworks | Boat Surveying & Inspection Annapolis, MD",
-    "seoDescription": "Ben's Boatworks in Annapolis, MD offers boat surveying, diving services, marine AC & plumbing. Serving the Chesapeake Bay region. Call today.",
+    "seoDescription": "Ben's Boatworks in Annapolis, MD offers boat surveying, diving services, marine AC & plumbing across South Florida. Call us today!",
     "seoKeywords": [
       "boat surveying Annapolis MD",
-      "marine inspection Chesapeake Bay",
-      "underwater diving services Annapolis",
+      "marine inspection Annapolis MD",
+      "diving underwater services Annapolis MD",
       "marine AC repair Annapolis MD",
-      "marine plumbing Annapolis Maryland",
-      "boat inspection Anne Arundel County",
-      "hull inspection diving services Maryland",
-      "marine sanitation systems Annapolis"
+      "marine plumbing Annapolis MD",
+      "boat sanitation services Annapolis MD",
+      "underwater hull cleaning Annapolis MD",
+      "marine climate control South Florida"
     ],
     "serviceDescriptions": {
-      "Boat Surveying & Inspection": "Ben's Boatworks conducts thorough vessel surveys and inspections covering structural integrity, mechanical systems, safety equipment, and overall condition — whether you need a pre-purchase survey, an insurance survey, or a condition-and-value report. Our detailed written reports give boat buyers and owners a clear, honest picture of exactly what they're working with before making any decisions.",
-      "Diving & Underwater Services": "Our dive team handles below-the-waterline work without the time and cost of a haul-out, including hull inspections, zinc anode replacement, propeller removal and installation, line and debris clearing, and underwater video documentation. Keeping up with underwater maintenance protects your hull coating, running gear, and through-hull fittings from the kind of damage that gets expensive fast.",
-      "Marine AC & Climate Control": "Ben's Boatworks installs, services, and repairs marine air conditioning and climate control systems, including raw-water cooled units, reverse-cycle systems, and multi-zone setups for larger vessels. Proper installation and regular maintenance keep your system running efficiently and extend the life of the equipment through the demands of a saltwater environment.",
-      "Marine Plumbing & Sanitation": "We handle full marine plumbing and sanitation work, including through-hull fitting installation and inspection, seacock service, freshwater system repairs, and holding tank system installation and compliance work. A properly maintained sanitation system isn't just about comfort — it's about keeping your vessel compliant with marine regulations and protecting the water you sail on."
+      "Boat Surveying & Inspection": "A professional boat survey provides a thorough evaluation of a vessel's structural integrity, mechanical systems, and overall condition. Whether it's a pre-purchase inspection or an insurance survey, detailed documentation helps buyers and owners make informed decisions and avoid costly surprises down the line.",
+      "Diving & Underwater Services": "Underwater diving services cover hull inspections, propeller checks, zinc replacement, line and debris removal, and bottom cleaning without the need to haul the vessel. Keeping a hull clean and hardware in good shape below the waterline directly affects performance, fuel efficiency, and long-term boat health.",
+      "Marine AC & Climate Control": "Marine air conditioning and climate control systems require specialized knowledge of chilled water systems, self-contained units, and the unique demands of a saltwater environment. Proper installation, routine maintenance, and timely repairs keep onboard temperatures comfortable and prevent system failures during peak boating season.",
+      "Marine Plumbing & Sanitation": "Marine plumbing and sanitation work includes installation, repair, and maintenance of holding tanks, through-hulls, seacocks, bilge pumps, and freshwater systems. Properly functioning sanitation systems are critical for both vessel safety and environmental compliance, and even small leaks or blockages can escalate quickly if left unaddressed."
     },
-    "serviceAreaDescription": "Ben's Boatworks is based in Annapolis, MD and provides mobile marine services throughout South Florida within a 500-mile radius.",
+    "serviceAreaDescription": "Ben's Boatworks is based in Annapolis, MD and provides mobile marine services throughout South Florida within a 60-mile radius.",
     "commonProjects": [
-      "Pre-purchase boat survey and full written inspection report",
-      "Hull and running gear inspection via underwater dive service",
-      "Zinc anode replacement without hauling out of the water",
-      "Marine air conditioning system installation on cruising vessel",
-      "Reverse-cycle climate control repair and refrigerant service",
-      "Holding tank and sanitation system installation for compliance",
-      "Through-hull fitting and seacock inspection or replacement"
+      "Pre-purchase boat survey and full condition inspection report",
+      "Underwater hull cleaning and zinc anode replacement",
+      "Marine AC system repair and seasonal maintenance service",
+      "Holding tank installation and sanitation system overhaul",
+      "Propeller inspection and debris removal via dive service",
+      "Through-hull and seacock inspection, repair, or replacement",
+      "Insurance survey and vessel documentation inspection"
     ],
     "serviceAreaLocalities": [
-      "East Coast",
-      "Mid-Atlantic",
-      "New England",
-      "Gulf Coast",
-      "Caribbean"
+      "Annapolis, MD",
+      "Baltimore, MD",
+      "Chesapeake Beach, MD",
+      "Easton, MD",
+      "Cambridge, MD"
     ],
-    "serviceAreaTitle": "Our Service Area",
-    "reviewSynopsis": {
-      "aggregateRating": 4.3,
-      "totalReviewCount": 466,
-      "boatworkReviewCount": 1,
-      "googleReviewCount": 465,
-      "summary": "Our clients trust us to solve the tough problems that other shops can't, like complex fuel injection issues on large vessels that have stumped other mechanics. We take pride in showing up when we say we will, offering fair pricing, and delivering results that leave boats running better than ever. The satisfaction our customers feel is clear in the word-of-mouth referrals we receive from marina communities.",
-      "keywords": [
-        "fuel injection repair",
-        "diesel diagnostics",
-        "Viking yacht service",
-        "reliable marine mechanic",
-        "fair pricing",
-        "complex engine repair",
-        "marina recommended"
-      ],
-      "sources": [
-        "boatwork",
-        "google"
-      ]
-    }
-  },
-  "synopsisUpdatedAt": "2026-04-08T13:20:24.498Z"
+    "serviceAreaTitle": "Our Service Area"
+  }
 }
