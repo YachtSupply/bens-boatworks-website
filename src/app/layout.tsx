@@ -67,12 +67,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <html lang="en" {...(!themeCssUrl ? { 'data-theme': data.websiteTheme || 'coastal-teal' } : {})}>
+    <html lang="en" {...(!themeCssUrl ? { 'data-theme': data.websiteTheme || 'navy-gold' } : {})}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400..900&display=swap"
           rel="stylesheet"
         />
         {themeCssUrl && (
