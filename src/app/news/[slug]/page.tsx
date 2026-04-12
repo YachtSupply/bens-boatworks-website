@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { GiAnchor } from 'react-icons/gi';
+
 import { getSiteData } from '@/lib/siteData';
 import { SectionWrapper } from '@/components/shared';
 
@@ -87,21 +87,15 @@ export default async function NewsSlugPage({
       {/* Hero */}
       <section className="bg-hero-gradient text-white py-24 px-4 text-center">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={18} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 max-w-3xl mx-auto leading-tight">
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
             {update.title ?? 'Update'}
           </h1>
-          <p className="text-gold-light font-sans text-base">
+          <p className="text-white/60 font-sans text-base">
             {formatDate(update.publishedAt)}
           </p>
         </div>
       </section>
-
-      <div className="gold-rule-full" />
 
       <SectionWrapper variant="cream">
         <div className="max-w-2xl mx-auto">
@@ -148,7 +142,7 @@ export default async function NewsSlugPage({
                   </div>
                 )}
                 <div className="p-5">
-                  <p className="font-serif font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
+                  <p className="font-heading font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
                   {update.linkDescription && (
                     <p className="text-text-light font-sans text-sm leading-relaxed line-clamp-3 mb-2">
                       {update.linkDescription}
@@ -174,7 +168,6 @@ export default async function NewsSlugPage({
         </div>
       </SectionWrapper>
 
-      <div className="gold-rule-full" />
     </>
   );
 }
