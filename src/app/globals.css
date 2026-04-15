@@ -3,38 +3,40 @@
 @tailwind utilities;
 
 /* ============================================================
-   Coastal Edge — Dark Editorial Maritime Design System
+   Coastal Edge — Light Editorial with Slate-Teal + Coral
+   Structurally distinct from marine-pro (no navy-gold, no serif,
+   no centered layouts, no nautical icons).
    ============================================================ */
 
 @layer base {
   :root {
-    --color-primary:           #0c1b2a;
-    --color-primary-rgb:       12 27 42;
-    --color-primary-light:     #1a3a5c;
-    --color-primary-light-rgb: 26 58 92;
-    --color-accent:            #c9a96e;
-    --color-accent-rgb:        201 169 110;
-    --color-accent-dark:       #b08d4f;
-    --color-accent-dark-rgb:   176 141 79;
-    --color-accent-light:      #d4bc8a;
-    --color-accent-light-rgb:  212 188 138;
-    --color-bg:                #f7f5f2;
-    --color-bg-rgb:            247 245 242;
-    --color-bg-dark:           #eae6e1;
-    --color-bg-dark-rgb:       234 230 225;
+    --color-primary:           #1b2d3a;
+    --color-primary-rgb:       27 45 58;
+    --color-primary-light:     #2a4a5e;
+    --color-primary-light-rgb: 42 74 94;
+    --color-accent:            #d4654a;
+    --color-accent-rgb:        212 101 74;
+    --color-accent-dark:       #b8503a;
+    --color-accent-dark-rgb:   184 80 58;
+    --color-accent-light:      #e88a74;
+    --color-accent-light-rgb:  232 138 116;
+    --color-bg:                #f5f0eb;
+    --color-bg-rgb:            245 240 235;
+    --color-bg-dark:           #e8dfd6;
+    --color-bg-dark-rgb:       232 223 214;
     --color-text:              #1a1a1a;
-    --color-text-light:        #6b7280;
+    --color-text-light:        #7a7a7a;
     --color-white:             #ffffff;
   }
 }
 
-/* Theme variants for Boatwork provisioning system */
-[data-theme='coastal-teal']   { --color-primary: #0c1b2a; --color-primary-rgb: 12 27 42; --color-primary-light: #1a3a5c; --color-primary-light-rgb: 26 58 92; --color-accent: #c9a96e; --color-accent-rgb: 201 169 110; --color-accent-dark: #b08d4f; --color-accent-dark-rgb: 176 141 79; --color-accent-light: #d4bc8a; --color-accent-light-rgb: 212 188 138; --color-bg: #f7f5f2; --color-bg-rgb: 247 245 242; --color-bg-dark: #eae6e1; --color-bg-dark-rgb: 234 230 225; --color-text: #1a1a1a; --color-text-light: #6b7280; --color-white: #ffffff; }
-[data-theme='pacific-blue']   { --color-primary: #0d2137; --color-primary-rgb: 13 33 55; --color-primary-light: #163a5e; --color-primary-light-rgb: 22 58 94; --color-accent: #d4a853; --color-accent-rgb: 212 168 83; --color-accent-dark: #b8923e; --color-accent-dark-rgb: 184 146 62; --color-accent-light: #e0be76; --color-accent-light-rgb: 224 190 118; --color-bg: #f5f7fa; --color-bg-rgb: 245 247 250; --color-bg-dark: #dde3ec; --color-bg-dark-rgb: 221 227 236; --color-text: #0f1c2e; --color-text-light: #4a5d74; --color-white: #ffffff; }
-[data-theme='deep-charcoal']  { --color-primary: #141414; --color-primary-rgb: 20 20 20; --color-primary-light: #2a2a2a; --color-primary-light-rgb: 42 42 42; --color-accent: #c9a96e; --color-accent-rgb: 201 169 110; --color-accent-dark: #b08d4f; --color-accent-dark-rgb: 176 141 79; --color-accent-light: #d4bc8a; --color-accent-light-rgb: 212 188 138; --color-bg: #f5f5f3; --color-bg-rgb: 245 245 243; --color-bg-dark: #e0e0dc; --color-bg-dark-rgb: 224 224 220; --color-text: #1a1a1a; --color-text-light: #666666; --color-white: #ffffff; }
-[data-theme='forest-green']   { --color-primary: #0f2318; --color-primary-rgb: 15 35 24; --color-primary-light: #1e4030; --color-primary-light-rgb: 30 64 48; --color-accent: #c9a96e; --color-accent-rgb: 201 169 110; --color-accent-dark: #b08d4f; --color-accent-dark-rgb: 176 141 79; --color-accent-light: #d4bc8a; --color-accent-light-rgb: 212 188 138; --color-bg: #f5f7f4; --color-bg-rgb: 245 247 244; --color-bg-dark: #dde5d8; --color-bg-dark-rgb: 221 229 216; --color-text: #1a2e22; --color-text-light: #4a6a55; --color-white: #ffffff; }
-[data-theme='midnight']       { --color-primary: #080808; --color-primary-rgb: 8 8 8; --color-primary-light: #181818; --color-primary-light-rgb: 24 24 24; --color-accent: #c9a96e; --color-accent-rgb: 201 169 110; --color-accent-dark: #b08d4f; --color-accent-dark-rgb: 176 141 79; --color-accent-light: #d4bc8a; --color-accent-light-rgb: 212 188 138; --color-bg: #f5f5f5; --color-bg-rgb: 245 245 245; --color-bg-dark: #e0e0e0; --color-bg-dark-rgb: 224 224 224; --color-text: #111111; --color-text-light: #555555; --color-white: #ffffff; }
-[data-theme='coastal-sage']   { --color-primary: #1a2e24; --color-primary-rgb: 26 46 36; --color-primary-light: #2e4a3a; --color-primary-light-rgb: 46 74 58; --color-accent: #c2945a; --color-accent-rgb: 194 148 90; --color-accent-dark: #a07840; --color-accent-dark-rgb: 160 120 64; --color-accent-light: #d4b078; --color-accent-light-rgb: 212 176 120; --color-bg: #f6f5f0; --color-bg-rgb: 246 245 240; --color-bg-dark: #e4e0d3; --color-bg-dark-rgb: 228 224 211; --color-text: #1a2e22; --color-text-light: #5a7060; --color-white: #ffffff; }
+/* Theme variants for Boatwork provisioning */
+[data-theme='coastal-teal'] { --color-primary: #1b2d3a; --color-primary-rgb: 27 45 58; --color-primary-light: #2a4a5e; --color-primary-light-rgb: 42 74 94; --color-accent: #d4654a; --color-accent-rgb: 212 101 74; --color-accent-dark: #b8503a; --color-accent-dark-rgb: 184 80 58; --color-accent-light: #e88a74; --color-accent-light-rgb: 232 138 116; --color-bg: #f5f0eb; --color-bg-rgb: 245 240 235; --color-bg-dark: #e8dfd6; --color-bg-dark-rgb: 232 223 214; --color-text: #1a1a1a; --color-text-light: #7a7a7a; --color-white: #ffffff; }
+[data-theme='pacific-blue'] { --color-primary: #1a3548; --color-primary-rgb: 26 53 72; --color-primary-light: #2b5474; --color-primary-light-rgb: 43 84 116; --color-accent: #e07a3a; --color-accent-rgb: 224 122 58; --color-accent-dark: #c0652a; --color-accent-dark-rgb: 192 101 42; --color-accent-light: #f0a070; --color-accent-light-rgb: 240 160 112; --color-bg: #f2f4f6; --color-bg-rgb: 242 244 246; --color-bg-dark: #dce0e6; --color-bg-dark-rgb: 220 224 230; --color-text: #1a1a1a; --color-text-light: #5a6a7a; --color-white: #ffffff; }
+[data-theme='deep-charcoal'] { --color-primary: #1e1e1e; --color-primary-rgb: 30 30 30; --color-primary-light: #333333; --color-primary-light-rgb: 51 51 51; --color-accent: #d4654a; --color-accent-rgb: 212 101 74; --color-accent-dark: #b8503a; --color-accent-dark-rgb: 184 80 58; --color-accent-light: #e88a74; --color-accent-light-rgb: 232 138 116; --color-bg: #f5f5f3; --color-bg-rgb: 245 245 243; --color-bg-dark: #e0e0dc; --color-bg-dark-rgb: 224 224 220; --color-text: #1a1a1a; --color-text-light: #666666; --color-white: #ffffff; }
+[data-theme='forest-green'] { --color-primary: #1a2e20; --color-primary-rgb: 26 46 32; --color-primary-light: #2a4a34; --color-primary-light-rgb: 42 74 52; --color-accent: #c87a3a; --color-accent-rgb: 200 122 58; --color-accent-dark: #a86428; --color-accent-dark-rgb: 168 100 40; --color-accent-light: #e0a060; --color-accent-light-rgb: 224 160 96; --color-bg: #f3f5f0; --color-bg-rgb: 243 245 240; --color-bg-dark: #dce0d4; --color-bg-dark-rgb: 220 224 212; --color-text: #1a2a1e; --color-text-light: #4a6050; --color-white: #ffffff; }
+[data-theme='midnight'] { --color-primary: #0a0a0a; --color-primary-rgb: 10 10 10; --color-primary-light: #1a1a1a; --color-primary-light-rgb: 26 26 26; --color-accent: #d4654a; --color-accent-rgb: 212 101 74; --color-accent-dark: #b8503a; --color-accent-dark-rgb: 184 80 58; --color-accent-light: #e88a74; --color-accent-light-rgb: 232 138 116; --color-bg: #f5f5f5; --color-bg-rgb: 245 245 245; --color-bg-dark: #e0e0e0; --color-bg-dark-rgb: 224 224 224; --color-text: #111111; --color-text-light: #555555; --color-white: #ffffff; }
+[data-theme='coastal-sage'] { --color-primary: #2a3e30; --color-primary-rgb: 42 62 48; --color-primary-light: #3e5a44; --color-primary-light-rgb: 62 90 68; --color-accent: #c88050; --color-accent-rgb: 200 128 80; --color-accent-dark: #a86838; --color-accent-dark-rgb: 168 104 56; --color-accent-light: #e0a870; --color-accent-light-rgb: 224 168 112; --color-bg: #f4f2ee; --color-bg-rgb: 244 242 238; --color-bg-dark: #ddd8d0; --color-bg-dark-rgb: 221 216 208; --color-text: #2a3430; --color-text-light: #5a6a5e; --color-white: #ffffff; }
 
 /* Backwards-compat aliases */
 :root, [data-theme] {
@@ -50,28 +52,22 @@
   --white:      var(--color-white);
 }
 
-/* ── Base ── */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background-color: var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, h4 {
-  font-family: 'DM Serif Display', Georgia, serif;
-  font-weight: 400;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
-/* ── Scroll offset for fixed nav ── */
 [id] { scroll-margin-top: 5.5rem; }
-
-/* ── Scrollbar hide ── */
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
-
-/* ── Lightbox ── */
-.yarl__container { background: rgba(12, 27, 42, 0.97) !important; }
+.yarl__container { background: rgba(27, 45, 58, 0.97) !important; }
 .yarl__button { color: var(--color-accent) !important; filter: none !important; }
-.yarl__button:hover { background: rgba(var(--color-accent-rgb) / 0.15) !important; }

@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Phone, MapPin, ArrowRight, Clock, Anchor, Star } from 'lucide-react';
+import { Phone, MapPin, ArrowRight, Clock, ArrowUpRight } from 'lucide-react';
 import { getSiteData } from '@/lib/siteData';
 import { formatPhone } from '@/lib/phoneUtils';
 import { ReviewCard, ReviewSynopsis, PortfolioGrid, ServiceAreaMap, ServiceCard, UpdatesFeed, ContactForm } from '@/components/shared';
@@ -25,25 +25,18 @@ export default async function HomePage() {
   const hasPortfolio = siteConfig.portfolio.length > 0 || siteConfig.videos.length > 0;
 
   const localBusinessSchema = siteConfig.apiSeo?.jsonLd ?? {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: siteConfig.name,
-    description: siteConfig.description,
-    url: siteUrl || undefined,
-    telephone: phone?.href.replace('tel:', '') ?? siteConfig.phone,
-    email: siteConfig.email,
+    '@context': 'https://schema.org', '@type': 'LocalBusiness',
+    name: siteConfig.name, description: siteConfig.description, url: siteUrl || undefined,
+    telephone: phone?.href.replace('tel:', '') ?? siteConfig.phone, email: siteConfig.email,
     address: { '@type': 'PostalAddress', addressLocality: siteConfig.city, addressRegion: siteConfig.state, addressCountry: 'US' },
     image: siteConfig.logoUrl,
     sameAs: [siteConfig.boatwork.profileUrl, siteConfig.social.facebook, siteConfig.social.instagram].filter(Boolean),
   };
 
   const serviceSchemas = siteConfig.services.map((s) => ({
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    serviceType: s.name,
+    '@context': 'https://schema.org', '@type': 'Service', serviceType: s.name,
     provider: { '@type': 'LocalBusiness', name: siteConfig.name },
-    description: s.description,
-    areaServed: `${siteConfig.city}, ${siteConfig.state}`,
+    description: s.description, areaServed: `${siteConfig.city}, ${siteConfig.state}`,
   }));
 
   const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
@@ -51,67 +44,62 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ═══ HERO ═══ */}
-      <section className="relative min-h-screen flex items-center justify-center bg-navy overflow-hidden">
-        {/* Subtle radial glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,110,0.06)_0%,transparent_70%)]" />
+      {/* ─── HERO ─── Light, left-aligned, not centered */}
+      <section className="min-h-[85vh] flex items-end bg-sand relative overflow-hidden pt-[72px]">
+        {/* Subtle accent shape */}
+        <div className="absolute top-0 right-0 w-[40vw] h-[60vh] bg-accent/[0.04] rounded-bl-[120px]" />
 
-        <div className="relative z-10 text-center px-5 sm:px-8 py-32 w-full max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 text-gold/80 text-xs font-semibold uppercase tracking-[0.2em] mb-10">
-            <MapPin size={13} strokeWidth={1.5} />
-            <span>{siteConfig.city}, {siteConfig.state}</span>
+        <div className="max-w-page mx-auto px-5 sm:px-8 w-full py-16 md:py-24 relative z-10">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 text-ink-muted text-[12px] font-medium tracking-wide mb-6">
+              <MapPin size={12} strokeWidth={1.5} />
+              {siteConfig.city}, {siteConfig.state}
+            </div>
+
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-brand leading-[1.05] tracking-tight mb-5">
+              {siteConfig.name}
+            </h1>
+
+            <p className="text-accent font-heading font-bold text-lg md:text-xl mb-4">
+              {siteConfig.tagline}
+            </p>
+
+            <p className="text-ink-muted text-base md:text-lg leading-relaxed mb-10 max-w-lg">
+              {siteConfig.description}
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/contact" className="bg-accent hover:bg-accent-dark text-white font-semibold text-[12px] uppercase tracking-wider px-7 py-4 rounded-full text-center transition-colors inline-flex items-center justify-center gap-2">
+                Get a Quote <ArrowRight size={14} strokeWidth={2} />
+              </Link>
+              <Link href="/services" className="border-2 border-brand/15 hover:border-brand/30 text-brand font-semibold text-[12px] uppercase tracking-wider px-7 py-4 rounded-full text-center transition-colors">
+                Our Services
+              </Link>
+            </div>
+
+            {phone && (
+              <a href={phone.href} className="mt-8 inline-flex items-center gap-2 text-ink-muted hover:text-accent transition-colors text-sm">
+                <Phone size={14} strokeWidth={1.5} /> {phone.display}
+              </a>
+            )}
           </div>
-
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] text-white leading-[1.05] mb-6">
-            {siteConfig.name}
-          </h1>
-
-          <div className="w-12 h-[2px] bg-gold mx-auto mb-6" />
-
-          <p className="text-gold/90 text-lg md:text-xl mb-4">
-            {siteConfig.tagline}
-          </p>
-
-          <p className="text-white/35 text-base md:text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-            {siteConfig.description}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/contact"
-              className="bg-gold hover:bg-gold-dark text-navy font-semibold text-xs uppercase tracking-[0.15em] px-8 py-4 rounded transition-colors"
-            >
-              Get a Quote
-            </Link>
-            <Link
-              href="/services"
-              className="border border-white/20 hover:border-white/40 text-white font-semibold text-xs uppercase tracking-[0.15em] px-8 py-4 rounded transition-colors"
-            >
-              Our Services
-            </Link>
-          </div>
-
-          {phone && (
-            <a href={phone.href} className="mt-10 inline-flex items-center gap-2.5 text-white/30 hover:text-gold transition-colors text-sm">
-              <Phone size={15} strokeWidth={1.5} />
-              <span>{phone.display}</span>
-            </a>
-          )}
         </div>
       </section>
 
-      {/* ═══ SERVICES ═══ */}
-      <section className="bg-surface py-24 px-5 sm:px-8" id="services">
+      {/* ─── SERVICES ─── */}
+      <section className="bg-white py-24 px-5 sm:px-8" id="services">
         <div className="max-w-page mx-auto">
-          <div className="max-w-2xl mb-14">
-            <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-3">What We Do</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-navy mb-4">Our Services</h2>
-            <p className="text-txt-muted leading-relaxed">
-              Comprehensive marine services delivered with expertise and care.
-            </p>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+            <div>
+              <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">What We Do</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight">Our Services</h2>
+            </div>
+            <Link href="/services" className="text-accent hover:text-accent-dark text-[13px] font-semibold flex items-center gap-1.5 transition-colors">
+              View All <ArrowUpRight size={14} strokeWidth={2} />
+            </Link>
           </div>
 
-          <div className={`grid gap-5 ${
+          <div className={`grid gap-4 ${
             siteConfig.services.length === 1 ? 'grid-cols-1 max-w-md' :
             siteConfig.services.length === 2 ? 'grid-cols-1 md:grid-cols-2 max-w-4xl' :
             'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
@@ -122,22 +110,16 @@ export default async function HomePage() {
               </div>
             ))}
           </div>
-
-          <div className="mt-12">
-            <Link href="/services" className="inline-flex items-center gap-2 text-gold hover:text-gold-dark text-sm font-semibold transition-colors">
-              View All Services <ArrowRight size={14} strokeWidth={2} />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ═══ REVIEWS ═══ */}
+      {/* ─── REVIEWS ─── Light bg, not dark */}
       {(siteConfig.reviewSynopsis || reviews.length > 0) && (
-        <section className="bg-navy py-24 overflow-hidden" id="reviews">
+        <section className="bg-sand py-24 overflow-hidden" id="reviews">
           <div className="max-w-page mx-auto px-5 sm:px-8">
-            <div className="max-w-2xl mb-12">
-              <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-3">Testimonials</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">What Our Clients Say</h2>
+            <div className="mb-12">
+              <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">Testimonials</p>
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight">What Our Clients Say</h2>
             </div>
 
             {siteConfig.reviewSynopsis && (
@@ -152,9 +134,9 @@ export default async function HomePage() {
           </div>
 
           {reviews.length > 0 && (
-            <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide px-5 sm:px-8">
+            <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide px-5 sm:px-8">
               {reviews.map((r, i) => (
-                <div key={r.id ?? `${r.author}-${i}`} className="min-w-[300px] md:min-w-[340px] flex-shrink-0 snap-start">
+                <div key={r.id ?? `${r.author}-${i}`} className="min-w-[280px] md:min-w-[320px] flex-shrink-0 snap-start">
                   <ReviewCard {...r} />
                 </div>
               ))}
@@ -163,112 +145,104 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ═══ UPDATES ═══ */}
+      {/* ─── UPDATES ─── */}
       {siteConfig.updates.length > 0 && (
         <section className="bg-white py-24 px-5 sm:px-8" id="updates">
           <div className="max-w-page mx-auto">
-            <div className="max-w-2xl mb-14">
-              <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-3">News</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-navy">Latest Updates</h2>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+              <div>
+                <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">News</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight">Latest Updates</h2>
+              </div>
+              <Link href="/news" className="text-accent hover:text-accent-dark text-[13px] font-semibold flex items-center gap-1.5 transition-colors">
+                View All <ArrowUpRight size={14} strokeWidth={2} />
+              </Link>
             </div>
             <UpdatesFeed updates={siteConfig.updates} businessName={siteConfig.name} logoUrl={siteConfig.logoUrl || undefined} />
-            <div className="mt-10">
-              <Link href="/news" className="inline-flex items-center gap-2 text-gold hover:text-gold-dark text-sm font-semibold transition-colors">
-                View All Updates <ArrowRight size={14} strokeWidth={2} />
-              </Link>
-            </div>
           </div>
         </section>
       )}
 
-      {/* ═══ PORTFOLIO ═══ */}
+      {/* ─── PORTFOLIO ─── */}
       {hasPortfolio && (
-        <section className="bg-surface-alt py-24 px-5 sm:px-8" id="portfolio">
+        <section className="bg-sand-dark py-24 px-5 sm:px-8" id="portfolio">
           <div className="max-w-page mx-auto">
-            <div className="max-w-2xl mb-14">
-              <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-3">Portfolio</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-navy">Our Work</h2>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-14">
+              <div>
+                <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">Portfolio</p>
+                <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight">Our Work</h2>
+              </div>
+              <Link href="/portfolio" className="text-accent hover:text-accent-dark text-[13px] font-semibold flex items-center gap-1.5 transition-colors">
+                View All <ArrowUpRight size={14} strokeWidth={2} />
+              </Link>
             </div>
             <PortfolioGrid items={siteConfig.portfolio.slice(0, 6)} videos={siteConfig.videos} businessName={siteConfig.name} />
-            <div className="mt-10">
-              <Link href="/portfolio" className="inline-flex items-center gap-2 text-gold hover:text-gold-dark text-sm font-semibold transition-colors">
-                View Full Portfolio <ArrowRight size={14} strokeWidth={2} />
-              </Link>
-            </div>
           </div>
         </section>
       )}
 
-      {/* ═══ SERVICE AREA ═══ */}
-      <section className="relative bg-surface py-24 px-5 sm:px-8 overflow-hidden" id="service-area">
-        <div className="absolute inset-0 opacity-[0.08]">
+      {/* ─── SERVICE AREA ─── */}
+      <section className="relative bg-white py-24 px-5 sm:px-8 overflow-hidden" id="service-area">
+        <div className="absolute inset-0 opacity-[0.06]">
           <ServiceAreaMap localities={siteConfig.serviceArea} />
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="text-gold text-xs font-semibold uppercase tracking-[0.2em] mb-3 flex items-center justify-center gap-2">
-            <MapPin size={13} strokeWidth={1.5} /> Service Area
-          </p>
-          <h2 className="font-serif text-3xl md:text-4xl text-navy mb-5">{siteConfig.serviceAreaTitle}</h2>
-          <p className="text-txt-muted leading-relaxed mb-10 max-w-2xl mx-auto">{siteConfig.serviceAreaDescription}</p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {siteConfig.serviceArea.map((a) => (
-              <span key={a} className="flex items-center gap-2 text-sm bg-white border border-black/[0.06] rounded-full px-4 py-2">
-                <MapPin size={12} strokeWidth={1.5} className="text-gold" />
-                <span className="text-navy font-medium">{a}</span>
-              </span>
-            ))}
+        <div className="relative z-10 max-w-2xl">
+          <div className="max-w-page mx-auto">
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 flex items-center gap-2">
+              <MapPin size={12} strokeWidth={1.5} /> Service Area
+            </p>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight mb-5">{siteConfig.serviceAreaTitle}</h2>
+            <p className="text-ink-muted leading-relaxed mb-8">{siteConfig.serviceAreaDescription}</p>
+            <div className="flex flex-wrap gap-2">
+              {siteConfig.serviceArea.map((a) => (
+                <span key={a} className="text-[13px] font-medium text-brand bg-sand rounded-full px-4 py-2">{a}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ═══ HOURS ═══ */}
-      <section className="bg-navy py-5 px-5 sm:px-8" id="hours">
-        <div className="max-w-page mx-auto">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-8">
-            <h3 className="font-sans text-sm font-semibold text-white flex items-center gap-2 flex-shrink-0">
-              <Clock size={14} strokeWidth={1.5} className="text-gold" />
-              Business Hours
-            </h3>
-            {hasHours ? (
-              <div className="flex flex-wrap gap-x-6 gap-y-2 lg:border-l lg:border-white/10 lg:pl-8">
-                {dayOrder.map((day) => {
-                  const hours = siteConfig.hoursOfOperation![day];
-                  if (!hours) return null;
-                  return (
-                    <div key={day} className="flex items-center gap-2 text-sm">
-                      <span className="text-white/35 font-medium">{day.slice(0, 3)}</span>
-                      <span className="text-gold text-xs">{hours === 'Open' ? 'All Day' : hours}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="text-white/40 text-sm">Available 24/7</p>
-            )}
-          </div>
+      {/* ─── HOURS ─── */}
+      <section className="bg-brand py-5 px-5 sm:px-8" id="hours">
+        <div className="max-w-page mx-auto flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-8">
+          <span className="text-[13px] font-semibold text-white flex items-center gap-2 flex-shrink-0">
+            <Clock size={13} strokeWidth={1.5} className="text-accent" /> Hours
+          </span>
+          {hasHours ? (
+            <div className="flex flex-wrap gap-x-5 gap-y-1.5 lg:border-l lg:border-white/10 lg:pl-8">
+              {dayOrder.map((day) => {
+                const h = siteConfig.hoursOfOperation![day];
+                if (!h) return null;
+                return (
+                  <div key={day} className="flex items-center gap-1.5 text-[13px]">
+                    <span className="text-white/35">{day.slice(0, 3)}</span>
+                    <span className="text-accent text-[12px]">{h === 'Open' ? 'All Day' : h}</span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : <p className="text-white/40 text-[13px]">Available 24/7</p>}
         </div>
       </section>
 
-      {/* ═══ CTA ═══ */}
-      <section className="bg-navy">
+      {/* ─── CTA ─── Split: text left, form right */}
+      <section className="bg-brand">
         <div className="max-w-page mx-auto grid grid-cols-1 lg:grid-cols-2">
-          {/* Left */}
           <div className="flex flex-col justify-center px-5 sm:px-8 lg:px-16 py-20">
-            <Anchor size={28} strokeWidth={1.5} className="text-gold mb-6" />
-            <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">Ready to Get Started?</h2>
-            <div className="w-12 h-[2px] bg-gold mb-6" />
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-4">Get in Touch</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">Ready to Get Started?</h2>
+            <div className="w-10 h-[2px] bg-accent mb-6" />
             <p className="text-white/40 text-base mb-8 max-w-md leading-relaxed">
               Speak directly with our team about your vessel.
             </p>
             {phone && (
-              <a href={phone.href} className="text-gold font-serif text-2xl md:text-3xl hover:text-gold-light transition-colors">
+              <a href={phone.href} className="text-accent font-heading text-2xl md:text-3xl font-extrabold hover:text-accent-light transition-colors">
                 {phone.display}
               </a>
             )}
           </div>
-          {/* Right */}
-          <div className="bg-white px-5 sm:px-8 lg:px-16 py-20 flex items-center">
-            <div className="w-full max-w-md mx-auto lg:mx-0">
+          <div className="bg-white px-5 sm:px-8 lg:px-14 py-20">
+            <div className="max-w-md mx-auto lg:mx-0">
               <ContactForm />
             </div>
           </div>

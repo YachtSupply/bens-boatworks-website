@@ -5,19 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        navy:    { DEFAULT: '#0c1b2a', light: '#1a3a5c', 800: '#112240' },
-        gold:    { DEFAULT: '#c9a96e', dark: '#b08d4f', light: '#d4bc8a' },
-        surface: { DEFAULT: '#f7f5f2', alt: '#eae6e1' },
-        txt:     { DEFAULT: '#1a1a1a', muted: '#6b7280' },
+        brand:   { DEFAULT: '#1b2d3a', light: '#2a4a5e', dark: '#0f1c26' },
+        accent:  { DEFAULT: '#d4654a', dark: '#b8503a', light: '#e88a74' },
+        sand:    { DEFAULT: '#f5f0eb', dark: '#e8dfd6' },
+        ink:     { DEFAULT: '#1a1a1a', muted: '#7a7a7a', light: '#a3a3a3' },
       },
       fontFamily: {
-        serif: ['"DM Serif Display"', 'Georgia', 'serif'],
-        sans:  ['Inter', 'system-ui', 'sans-serif'],
-      },
-      borderRadius: {
-        DEFAULT: '8px',
-        lg: '12px',
-        full: '9999px',
+        heading: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        body:    ['Inter', 'system-ui', 'sans-serif'],
       },
       maxWidth: {
         page: '1280px',

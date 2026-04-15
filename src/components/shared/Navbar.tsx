@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, Phone, ArrowRight } from 'lucide-react';
 import { siteConfig } from '@/site.config';
 
 const ALL_LINKS = [
@@ -43,111 +43,78 @@ export function Navbar({ logoUrl, name, hasPortfolio = false, hasUpdates = false
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled && !open
-            ? 'bg-navy shadow-xl shadow-navy/20'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-page mx-auto px-5 sm:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
-              {logoUrl ? (
-                <Image src={logoUrl} alt={displayName} width={36} height={36} className="rounded-lg object-cover" unoptimized />
-              ) : (
-                <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-gold text-navy font-serif text-lg">
-                  {displayName.charAt(0)}
-                </span>
-              )}
-              <span className="font-sans font-semibold text-white text-sm tracking-wide">
-                {displayName}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white'
+      }`}>
+        <div className="max-w-page mx-auto px-5 sm:px-8 flex items-center justify-between h-[72px]">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5">
+            {logoUrl ? (
+              <Image src={logoUrl} alt={displayName} width={32} height={32} className="rounded-lg object-cover" unoptimized />
+            ) : (
+              <span className="w-8 h-8 rounded-lg bg-brand text-white font-heading font-bold text-sm flex items-center justify-center">
+                {displayName.charAt(0)}
               </span>
-            </Link>
+            )}
+            <span className="font-heading font-bold text-brand text-[15px]">{displayName}</span>
+          </Link>
 
-            {/* Desktop links */}
-            <div className="hidden lg:flex items-center gap-8">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className="text-white/60 hover:text-gold text-sm font-medium tracking-wide transition-colors"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Desktop right */}
-            <div className="hidden lg:flex items-center gap-5">
-              {phone && (
-                <a href={`tel:${phone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-white/50 hover:text-white text-sm transition-colors">
-                  <Phone size={14} strokeWidth={1.5} />
-                  <span>{phone}</span>
-                </a>
-              )}
-              <Link
-                href="/contact"
-                className="bg-gold hover:bg-gold-dark text-navy font-semibold text-xs uppercase tracking-widest px-6 py-3 rounded transition-colors"
-              >
-                Get a Quote
-              </Link>
-            </div>
-
-            {/* Mobile toggle */}
-            <button
-              className="lg:hidden text-white/80 hover:text-white p-1 transition-colors"
-              onClick={() => setOpen(!open)}
-              aria-label={open ? 'Close menu' : 'Open menu'}
-            >
-              {open ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Full-screen overlay */}
-      <div
-        className={`fixed inset-0 z-40 bg-navy flex flex-col transition-all duration-500 ease-in-out ${
-          open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-        }`}
-      >
-        <div className="h-20" /> {/* spacer for nav bar */}
-        <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-3">
-            {links.map((l, i) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`font-serif text-4xl sm:text-5xl md:text-6xl text-white/25 hover:text-gold transition-all duration-300 ${
-                  open ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-                }`}
-                style={{ transitionDelay: open ? `${80 + i * 50}ms` : '0ms' }}
-                onClick={() => setOpen(false)}
-              >
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-7">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href} className="text-[13px] font-medium text-ink-muted hover:text-brand transition-colors">
                 {l.label}
               </Link>
             ))}
           </div>
+
+          {/* Desktop right */}
+          <div className="hidden lg:flex items-center gap-4">
+            {phone && (
+              <a href={`tel:${phone.replace(/\D/g, '')}`} className="text-[13px] text-ink-muted hover:text-brand transition-colors flex items-center gap-1.5">
+                <Phone size={13} strokeWidth={1.5} /> {phone}
+              </a>
+            )}
+            <Link href="/contact" className="bg-accent hover:bg-accent-dark text-white text-[12px] font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full transition-colors">
+              Get a Quote
+            </Link>
+          </div>
+
+          {/* Mobile */}
+          <button className="lg:hidden text-brand p-1" onClick={() => setOpen(!open)} aria-label={open ? 'Close' : 'Menu'}>
+            {open ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
+          </button>
         </div>
-        <div
-          className={`border-t border-white/10 px-5 sm:px-8 py-5 flex items-center justify-between transition-all duration-300 ${
-            open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
-          }`}
-          style={{ transitionDelay: open ? '400ms' : '0ms' }}
-        >
+      </nav>
+
+      {/* Full-screen overlay */}
+      <div className={`fixed inset-0 z-40 bg-brand transition-all duration-500 ${open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
+        <div className="h-[72px]" />
+        <div className="flex-1 flex flex-col items-start justify-center h-[calc(100vh-72px-80px)] px-8 sm:px-12">
+          {links.map((l, i) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold text-white/30 hover:text-accent transition-all duration-300 py-2 ${
+                open ? 'translate-x-0 opacity-100' : '-translate-x-6 opacity-0'
+              }`}
+              style={{ transitionDelay: open ? `${60 + i * 40}ms` : '0ms' }}
+              onClick={() => setOpen(false)}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+        <div className={`border-t border-white/10 px-8 sm:px-12 py-5 flex items-center justify-between transition-all duration-300 ${
+          open ? 'opacity-100' : 'opacity-0'
+        }`} style={{ transitionDelay: open ? '350ms' : '0ms' }}>
           {phone ? (
-            <a href={`tel:${phone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-white/40 hover:text-gold text-sm transition-colors">
+            <a href={`tel:${phone.replace(/\D/g, '')}`} className="text-white/40 hover:text-accent text-sm flex items-center gap-2 transition-colors">
               <Phone size={14} strokeWidth={1.5} /> {phone}
             </a>
           ) : <span />}
-          <Link
-            href="/contact"
-            className="bg-gold hover:bg-gold-dark text-navy font-semibold text-xs uppercase tracking-widest px-6 py-3 rounded inline-flex items-center gap-2 transition-colors"
-            onClick={() => setOpen(false)}
-          >
-            Get a Quote <ArrowRight size={14} strokeWidth={2} />
+          <Link href="/contact" className="bg-accent text-white text-xs font-semibold uppercase tracking-wider px-5 py-2.5 rounded-full inline-flex items-center gap-2" onClick={() => setOpen(false)}>
+            Get a Quote <ArrowRight size={12} strokeWidth={2} />
           </Link>
         </div>
       </div>

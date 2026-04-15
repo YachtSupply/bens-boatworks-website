@@ -1,14 +1,4 @@
-import { Anchor, Compass, Droplets, Wrench, Zap, Users } from 'lucide-react';
-
-const iconMap: Record<string, React.ReactNode> = {
-  wheel:    <Compass size={22} strokeWidth={1.5} />,
-  anchor:   <Anchor size={22} strokeWidth={1.5} />,
-  waves:    <Droplets size={22} strokeWidth={1.5} />,
-  wrench:   <Wrench size={22} strokeWidth={1.5} />,
-  electric: <Zap size={22} strokeWidth={1.5} />,
-  engine:   <Wrench size={22} strokeWidth={1.5} />,
-  captain:  <Users size={22} strokeWidth={1.5} />,
-};
+import { ArrowUpRight } from 'lucide-react';
 
 interface ServiceCardProps {
   name: string;
@@ -22,32 +12,28 @@ interface ServiceCardProps {
   flipped?: boolean;
 }
 
-export function ServiceCard({ name, description, icon, keywords, benefits, priceRange, typicalDuration }: ServiceCardProps) {
+export function ServiceCard({ name, description, keywords, benefits, priceRange, typicalDuration }: ServiceCardProps) {
   return (
-    <div className="bg-white rounded-lg border border-black/[0.06] p-7 flex flex-col h-full group hover:shadow-lg hover:shadow-navy/[0.06] hover:-translate-y-1 transition-all duration-300">
-      <div className="w-11 h-11 rounded-lg bg-navy/[0.06] flex items-center justify-center text-gold mb-5">
-        {iconMap[icon] ?? iconMap.anchor}
+    <div className="bg-white rounded-2xl p-7 flex flex-col h-full group hover:shadow-xl hover:shadow-brand/[0.05] transition-all duration-300 border border-transparent hover:border-accent/20">
+      <div className="flex items-start justify-between mb-4">
+        <h3 className="font-heading text-[17px] font-bold text-brand leading-snug">{name}</h3>
+        <ArrowUpRight size={16} strokeWidth={1.5} className="text-ink-light group-hover:text-accent transition-colors flex-shrink-0 mt-1" />
       </div>
 
-      <h3 className="font-sans text-lg font-semibold text-navy mb-2">{name}</h3>
-      <p className="text-txt-muted text-sm leading-relaxed flex-1 mb-5">{description}</p>
+      <p className="text-ink-muted text-[14px] leading-relaxed flex-1 mb-5">{description}</p>
 
       {(priceRange || typicalDuration) && (
         <div className="flex flex-wrap gap-2 mb-4">
-          {priceRange && (
-            <span className="text-xs font-medium text-gold bg-gold/10 px-3 py-1 rounded-full">{priceRange}</span>
-          )}
-          {typicalDuration && (
-            <span className="text-xs font-medium text-txt-muted bg-surface-alt px-3 py-1 rounded-full">{typicalDuration}</span>
-          )}
+          {priceRange && <span className="text-[11px] font-semibold text-accent bg-accent/10 px-3 py-1 rounded-full">{priceRange}</span>}
+          {typicalDuration && <span className="text-[11px] font-medium text-ink-muted bg-sand px-3 py-1 rounded-full">{typicalDuration}</span>}
         </div>
       )}
 
       {benefits && benefits.length > 0 && (
         <ul className="space-y-1.5 mb-4">
           {benefits.map((b) => (
-            <li key={b} className="flex items-start gap-2 text-sm text-txt">
-              <span className="text-gold mt-0.5 text-xs">&#10003;</span>
+            <li key={b} className="flex items-start gap-2 text-[13px] text-ink">
+              <span className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
               <span>{b}</span>
             </li>
           ))}
@@ -55,9 +41,9 @@ export function ServiceCard({ name, description, icon, keywords, benefits, price
       )}
 
       {keywords && keywords.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 pt-4 border-t border-black/[0.06]">
+        <div className="flex flex-wrap gap-1.5 pt-4 border-t border-sand-dark">
           {keywords.map((kw) => (
-            <span key={kw} className="text-xs text-txt-muted">{kw}</span>
+            <span key={kw} className="text-[11px] text-ink-light">{kw}</span>
           ))}
         </div>
       )}
