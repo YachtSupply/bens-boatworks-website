@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = 'force-dynamic'; // v1.2
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FiPhone, FiArrowRight, FiMapPin, FiAnchor, FiClock } from 'react-icons/fi';
