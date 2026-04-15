@@ -2,10 +2,8 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { FiArrowRight } from 'react-icons/fi';
-import { FiMapPin } from 'react-icons/fi';
 import { getSiteData } from '@/lib/siteData';
-import { SectionWrapper, SafeHtmlImage } from '@/components/shared';
+import { SafeHtmlImage } from '@/components/shared';
 import type { BoatworkUpdate } from '@/lib/boatwork';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -59,7 +57,6 @@ function linkifyContent(text: string): React.ReactNode[] {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-navy underline decoration-gold/40 hover:decoration-gold transition-colors break-all"
       >
         {url}
       </a>,
@@ -84,56 +81,43 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
       : update.content;
 
     return (
-      <article className="bg-white border border-cream-dark rounded-2xl p-8 flex flex-col gap-5">
-        {/* Header */}
-        <div className="flex items-center gap-3">
+      <article>
+        <div>
           {logoUrl ? (
             <SafeHtmlImage
               src={logoUrl}
               alt={businessName}
-              className="w-12 h-12 rounded-full object-cover border border-cream-dark flex-shrink-0"
               placeholderContent={
-                <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
+                <div>
                   {businessName.charAt(0)}
                 </div>
               }
               showPlaceholder
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
+            <div>
               {businessName.charAt(0)}
             </div>
           )}
-          <div className="flex-1 min-w-0">
-            <p className="font-heading font-semibold text-navy truncate">{businessName}</p>
-            <p className="text-text-light text-sm font-sans">{formatRelativeTime(update.publishedAt)}</p>
+          <div>
+            <p>{businessName}</p>
+            <p>{formatRelativeTime(update.publishedAt)}</p>
           </div>
           {update.isPinned && (
-            <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-gold bg-gold/10 px-2.5 py-1 rounded-full flex-shrink-0">
-              <FiMapPin size={10} />
-              Pinned
-            </span>
+            <span>Pinned</span>
           )}
         </div>
 
-        {/* Long-form title */}
         {update.title && (
-          <h2 className="font-heading text-2xl font-bold text-navy leading-snug">
-            {update.title}
-          </h2>
+          <h2>{update.title}</h2>
         )}
 
-        {/* Truncated content */}
-        <div className="text-text font-sans leading-relaxed whitespace-pre-line">
+        <div>
           {linkifyContent(truncated)}
         </div>
 
-        {/* Read more link */}
         {update.slug && (
-          <Link
-            href={`/news/${update.slug}`}
-            className="self-start text-navy font-sans font-semibold text-sm underline decoration-gold/40 hover:decoration-gold transition-colors"
-          >
+          <Link href={`/news/${update.slug}`}>
             Read more →
           </Link>
         )}
@@ -142,81 +126,68 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
   }
 
   return (
-    <article className="bg-white border border-cream-dark rounded-2xl p-8 flex flex-col gap-5">
-      {/* Header */}
-      <div className="flex items-center gap-3">
+    <article>
+      <div>
         {logoUrl ? (
           <SafeHtmlImage
             src={logoUrl}
             alt={businessName}
-            className="w-12 h-12 rounded-full object-cover border border-cream-dark flex-shrink-0"
             placeholderContent={
-              <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
+              <div>
                 {businessName.charAt(0)}
               </div>
             }
             showPlaceholder
           />
         ) : (
-          <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
+          <div>
             {businessName.charAt(0)}
           </div>
         )}
-        <div className="flex-1 min-w-0">
-          <p className="font-heading font-semibold text-navy truncate">{businessName}</p>
-          <p className="text-text-light text-sm font-sans">{formatRelativeTime(update.publishedAt)}</p>
+        <div>
+          <p>{businessName}</p>
+          <p>{formatRelativeTime(update.publishedAt)}</p>
         </div>
         {update.isPinned && (
-          <span className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-gold bg-gold/10 px-2.5 py-1 rounded-full flex-shrink-0">
-            <FiMapPin size={10} />
-            Pinned
-          </span>
+          <span>Pinned</span>
         )}
       </div>
 
-      {/* Full content — no truncation */}
-      <div className="text-text font-sans leading-relaxed whitespace-pre-line">
+      <div>
         {linkifyContent(update.content)}
       </div>
 
-      {/* Link preview card */}
       {hasLinkPreview && (
         <a
           href={update.linkUrl!}
           target="_blank"
           rel="noopener noreferrer"
-          className="block border border-cream-dark rounded-lg overflow-hidden hover:border-gold/40 transition-colors"
         >
           {update.linkImage && (
-            <div className="relative w-full h-52 bg-cream">
+            <div>
               <img
                 src={update.linkImage}
                 alt={update.linkTitle ?? ''}
-                className="w-full h-full object-cover"
               />
             </div>
           )}
-          <div className="p-5">
-            <p className="font-heading font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
+          <div>
+            <p>{update.linkTitle}</p>
             {update.linkDescription && (
-              <p className="text-text-light font-sans text-sm leading-relaxed line-clamp-3 mb-2">
-                {update.linkDescription}
-              </p>
+              <p>{update.linkDescription}</p>
             )}
             {update.linkDomain && (
-              <p className="text-text-light/60 font-sans text-xs">{update.linkDomain}</p>
+              <p>{update.linkDomain}</p>
             )}
           </div>
         </a>
       )}
 
-      {/* Standalone image */}
       {hasImage && (
-        <div className="rounded-lg overflow-hidden">
+        <div>
           <img
             src={update.imageUrl!}
             alt={update.imageAlt ?? ''}
-            className="w-full max-h-[28rem] object-cover rounded-lg"
           />
         </div>
       )}
@@ -234,19 +205,15 @@ export default async function NewsPage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-hero-gradient text-white py-24 px-4 text-center">
-        <div className="max-w-7xl mx-auto">
-          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-          <h1 className="font-heading text-5xl font-extrabold mb-4 tracking-tight">News & Updates</h1>
-          <p className="text-white/60 font-sans text-lg">
-            The latest from {siteConfig.name}
-          </p>
+      <section>
+        <div>
+          <h1>News &amp; Updates</h1>
+          <p>The latest from {siteConfig.name}</p>
         </div>
       </section>
 
-      <SectionWrapper variant="cream">
-        <div className="max-w-2xl mx-auto space-y-6">
+      <section>
+        <div>
           {updates.map((update) => (
             <UpdatePost
               key={update.id}
@@ -256,23 +223,19 @@ export default async function NewsPage() {
             />
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* CTA */}
-      <SectionWrapper variant="navy">
-        <div className="text-center py-8">
-          <h2 className="font-heading text-4xl font-extrabold mb-4 tracking-tight">Need Marine Services?</h2>
-          <p className="text-white/50 font-sans mb-8 max-w-xl mx-auto text-lg">
+      <section>
+        <div>
+          <h2>Need Marine Services?</h2>
+          <p>
             Contact our team today to discuss your vessel and get a personalized quote.
           </p>
-          <Link
-            href="/contact"
-            className="btn-gold inline-flex items-center gap-2 px-8 py-4 whitespace-nowrap"
-          >
-            Get a Quote <FiArrowRight size={14} />
+          <Link href="/contact">
+            Get a Quote
           </Link>
         </div>
-      </SectionWrapper>
+      </section>
     </>
   );
 }

@@ -1,6 +1,5 @@
 export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
-import { FiPhone, FiMapPin, FiClock, FiFacebook, FiInstagram, FiMail, FiShield } from 'react-icons/fi';
 import { getSiteData } from '@/lib/siteData';
 import { formatPhone } from '@/lib/phoneUtils';
 import { ContactForm, BoatworkBadge } from '@/components/shared';
@@ -27,69 +26,48 @@ export default async function ContactPage() {
 
   return (
     <>
-      {/* ══════════════════════════════════════════════════════
-          TWO-TONE SPLIT — Dark info left, light form right
-          ══════════════════════════════════════════════════════ */}
-      <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-        {/* LEFT — Dark side with all contact info */}
-        <div className="bg-navy text-white px-5 sm:px-8 lg:px-14 py-16 lg:py-0 flex flex-col justify-center">
-          <div className="max-w-md mx-auto lg:mx-0 pt-24 lg:pt-0">
-            <p className="text-gold font-heading font-bold text-sm uppercase tracking-wider mb-4">Contact</p>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4 leading-tight">
-              Get in Touch
-            </h1>
-            <p className="text-white/40 font-sans text-lg mb-10 leading-relaxed">
-              We would love to discuss how we can care for your&nbsp;vessel.
-            </p>
+      <div>
+        <div>
+          <div>
+            <p>Contact</p>
+            <h1>Get in Touch</h1>
+            <p>We would love to discuss how we can care for your vessel.</p>
 
-            {/* Contact details */}
-            <div className="space-y-5 mb-10">
+            <div>
               {phone && (
-                <a href={phone.href ?? `tel:${siteConfig.phone}`} className="flex items-center gap-4 text-white/70 hover:text-white transition-colors group">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 group-hover:bg-gold transition-all">
-                    <FiPhone size={18} />
-                  </span>
+                <a href={phone.href ?? `tel:${siteConfig.phone}`}>
                   <div>
-                    <p className="text-xs font-heading font-bold text-white/40 mb-0.5">Phone</p>
-                    <p className="font-sans text-sm">{phone.display ?? siteConfig.phone}</p>
+                    <p>Phone</p>
+                    <p>{phone.display ?? siteConfig.phone}</p>
                   </div>
                 </a>
               )}
               {siteConfig.email && (
-                <a href={`mailto:${siteConfig.email}`} className="flex items-center gap-4 text-white/70 hover:text-white transition-colors group">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 group-hover:bg-gold transition-all">
-                    <FiMail size={18} />
-                  </span>
+                <a href={`mailto:${siteConfig.email}`}>
                   <div>
-                    <p className="text-xs font-heading font-bold text-white/40 mb-0.5">Email</p>
-                    <p className="font-sans text-sm">{siteConfig.email}</p>
+                    <p>Email</p>
+                    <p>{siteConfig.email}</p>
                   </div>
                 </a>
               )}
-              <div className="flex items-center gap-4 text-white/70">
-                <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10">
-                  <FiMapPin size={18} />
-                </span>
+              <div>
                 <div>
-                  <p className="text-xs font-heading font-bold text-white/40 mb-0.5">Location</p>
-                  <p className="font-sans text-sm">{siteConfig.address}</p>
+                  <p>Location</p>
+                  <p>{siteConfig.address}</p>
                 </div>
               </div>
               {hasHours && (
-                <div className="flex items-start gap-4 text-white/70">
-                  <span className="flex items-center justify-center w-11 h-11 rounded-xl bg-white/10 flex-shrink-0">
-                    <FiClock size={18} />
-                  </span>
+                <div>
                   <div>
-                    <p className="text-xs font-heading font-bold text-white/40 mb-1.5">Hours</p>
-                    <div className="space-y-1">
+                    <p>Hours</p>
+                    <div>
                       {dayOrder.map((day) => {
                         const hours = siteConfig.hoursOfOperation![day];
                         if (!hours) return null;
                         return (
-                          <div key={day} className="flex gap-2 text-sm font-sans">
-                            <span className="text-white/40 w-10">{day.slice(0, 3)}</span>
-                            <span className="text-white/70">{formatHours(hours)}</span>
+                          <div key={day}>
+                            <span>{day.slice(0, 3)}</span>
+                            <span>{formatHours(hours)}</span>
                           </div>
                         );
                       })}
@@ -99,24 +77,23 @@ export default async function ContactPage() {
               )}
             </div>
 
-            {/* Social links */}
             {(siteConfig.social.facebook || siteConfig.social.instagram) && (
-              <div className="flex gap-3 mb-8">
+              <div>
                 {siteConfig.social.facebook && (
-                  <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 hover:bg-gold hover:text-white transition-all">
-                    <FiFacebook size={16} />
+                  <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer">
+                    Facebook
                   </a>
                 )}
                 {siteConfig.social.instagram && (
-                  <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/50 hover:bg-gold hover:text-white transition-all">
-                    <FiInstagram size={16} />
+                  <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer">
+                    Instagram
                   </a>
                 )}
               </div>
             )}
 
             {hasBadge && (
-              <div className="flex flex-wrap gap-2">
+              <div>
                 {siteConfig.badges.length > 0 ? (
                   siteConfig.badges.map((b, i) => (
                     <BoatworkBadge key={b.id ?? i} profileUrl={b.profileUrl ?? siteConfig.boatwork.profileUrl} badgeUrl={b.badgeUrl} svgUrl={b.svgUrl} embedCode={b.embedCode} inverted />
@@ -129,23 +106,20 @@ export default async function ContactPage() {
           </div>
         </div>
 
-        {/* RIGHT — Light side with form */}
-        <div className="bg-cream px-5 sm:px-8 lg:px-14 py-16 lg:py-0 flex flex-col justify-center">
-          <div className="max-w-md mx-auto lg:mx-0 w-full pt-8 lg:pt-24">
-            <h2 className="font-heading text-3xl font-extrabold text-navy tracking-tight mb-2">Request a Quote</h2>
-            <p className="text-text-light font-sans text-sm mb-8">Fill out the form below and we&rsquo;ll get back to you within one business&nbsp;day.</p>
+        <div>
+          <div>
+            <h2>Request a Quote</h2>
+            <p>Fill out the form below and we&rsquo;ll get back to you within one business day.</p>
             <ContactForm />
-            <div className="flex items-center gap-2 text-xs text-text-light font-sans justify-center mt-6">
-              <FiShield size={12} className="text-gold" />
+            <div>
               Your information is kept strictly confidential.
             </div>
           </div>
         </div>
       </div>
 
-      {/* Map — full width below */}
       {mapQuery && (
-        <div className="relative">
+        <div>
           <iframe
             src={`https://maps.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed&z=14`}
             width="100%"
@@ -156,14 +130,13 @@ export default async function ContactPage() {
             referrerPolicy="no-referrer-when-downgrade"
             title="Location Map"
           />
-          <div className="absolute bottom-4 left-4">
+          <div>
             <a
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white shadow-lg rounded-xl px-4 py-2.5 text-xs font-sans font-semibold text-navy hover:text-gold transition-colors flex items-center gap-1.5"
             >
-              <FiMapPin size={12} /> Get Directions
+              Get Directions
             </a>
           </div>
         </div>

@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { FiInstagram, FiFacebook, FiCamera, FiMessageSquare, FiStar, FiSun, FiArrowRight } from 'react-icons/fi';
-import { SectionWrapper } from '@/components/shared';
 import { getSiteData } from '@/lib/siteData';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -15,25 +13,21 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const pillars = [
   {
-    icon: <FiCamera size={22} />,
     label: 'The Work',
     pct: '40%',
     description: 'Real job photos and videos. Before/afters, project walkthroughs, and completed work. No stock photos — ever.',
   },
   {
-    icon: <FiMessageSquare size={22} />,
     label: 'Education',
     pct: '25%',
     description: 'Quick tips for yacht owners. Positions us as the expert and builds trust before they call.',
   },
   {
-    icon: <FiStar size={22} />,
     label: 'Social Proof',
     pct: '20%',
     description: 'Real reviews, client shoutouts, and completed project reveals pulled directly from our Boatwork profile.',
   },
   {
-    icon: <FiSun size={22} />,
     label: 'Lifestyle',
     pct: '15%',
     description: 'Marina life, sunsets, and the boating lifestyle. Aspirational and authentic.',
@@ -105,145 +99,120 @@ function getInstagramHandle(url: string): string {
   }
 }
 
-const platformIcon = (p: string) =>
+const platformLabel = (p: string) =>
   p === 'instagram'
-    ? <span key="ig" className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-white bg-[#E1306C] px-2 py-0.5 rounded-full"><FiInstagram size={11} /> Instagram</span>
-    : <span key="fb" className="inline-flex items-center gap-1 text-xs font-sans font-semibold text-white bg-[#1877F2] px-2 py-0.5 rounded-full"><FiFacebook size={11} /> Facebook</span>;
+    ? <span key="ig">Instagram</span>
+    : <span key="fb">Facebook</span>;
 
 export default async function SocialPage() {
   const siteData = await getSiteData();
   const calendar = buildCalendar(siteData.name, siteData.phone, siteData.city);
   return (
     <>
-      {/* Hero */}
-      <section className="bg-hero-gradient text-white py-24 px-4 text-center">
-        <div className="max-w-7xl mx-auto">
-          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-          <h1 className="font-heading text-5xl font-extrabold tracking-tight mb-4">Social Media</h1>
-          <p className="text-white/50 font-sans max-w-xl mx-auto">
-            Managed social media marketing for {siteData.name} — powered by Boatwork.
-          </p>
-          <div className="flex items-center justify-center gap-6 mt-8">
+      <section>
+        <div>
+          <h1>Social Media</h1>
+          <p>Managed social media marketing for {siteData.name} — powered by Boatwork.</p>
+          <div>
             {siteData.social.instagram && (
-              <a href={siteData.social.instagram} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-gold/40 text-white px-5 py-2.5 hover:border-gold hover:bg-white/5 transition-all font-sans text-sm font-semibold">
-                <FiInstagram size={16} /> {getInstagramHandle(siteData.social.instagram)}
+              <a href={siteData.social.instagram} target="_blank" rel="noopener noreferrer">
+                {getInstagramHandle(siteData.social.instagram)}
               </a>
             )}
             {siteData.social.facebook && (
-              <a href={siteData.social.facebook} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-gold/40 text-white px-5 py-2.5 hover:border-gold hover:bg-white/5 transition-all font-sans text-sm font-semibold">
-                <FiFacebook size={16} /> Facebook
+              <a href={siteData.social.facebook} target="_blank" rel="noopener noreferrer">
+                Facebook
               </a>
             )}
           </div>
         </div>
       </section>
 
-      {/* Strategy Overview */}
-      <SectionWrapper variant="cream">
-        <div className="text-center mb-14">
-          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-          <h2 className="font-heading text-4xl font-extrabold tracking-tight text-navy mb-4">Our Strategy</h2>
-          <p className="text-text-light font-sans max-w-2xl mx-auto leading-relaxed">
+      <section>
+        <div>
+          <h2>Our Strategy</h2>
+          <p>
             Four content pillars, seven posts per week across Instagram and Facebook. Every post uses real photos from our work — no stock, no filler.
           </p>
         </div>
 
-        {/* Frequency badges */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-heading text-3xl font-bold text-navy">4x</p>
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Instagram / week</p>
+        <div>
+          <div>
+            <p>4x</p>
+            <p>Instagram / week</p>
           </div>
-          <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-heading text-3xl font-bold text-navy">3x</p>
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Facebook / week</p>
+          <div>
+            <p>3x</p>
+            <p>Facebook / week</p>
           </div>
-          <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-heading text-3xl font-bold text-navy">7</p>
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Total posts / week</p>
+          <div>
+            <p>7</p>
+            <p>Total posts / week</p>
           </div>
-          <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-heading text-3xl font-bold text-navy">0</p>
-            <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Stock photos used</p>
+          <div>
+            <p>0</p>
+            <p>Stock photos used</p>
           </div>
         </div>
 
-        {/* Content pillars */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-cream-dark">
+        <div>
           {pillars.map((p) => (
-            <div key={p.label} className="bg-white p-8">
-              <div className="text-gold mb-4">{p.icon}</div>
-              <div className="flex items-baseline gap-2 mb-3">
-                <p className="font-heading text-lg font-bold text-navy">{p.label}</p>
-                <span className="text-xs font-sans font-semibold text-gold">{p.pct}</span>
+            <div key={p.label}>
+              <div>
+                <p>{p.label}</p>
+                <span>{p.pct}</span>
               </div>
-              <p className="text-text-light font-sans text-sm leading-relaxed">{p.description}</p>
+              <p>{p.description}</p>
             </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Content Calendar */}
-      <SectionWrapper variant="white">
-        <div className="text-center mb-14">
-          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-          <h2 className="font-heading text-4xl font-extrabold tracking-tight text-navy mb-4">Weekly Content Calendar</h2>
-          <p className="text-text-light font-sans max-w-xl mx-auto">
-            Sample week of content — copy written, platforms assigned, hashtags ready.
-          </p>
+      <section>
+        <div>
+          <h2>Weekly Content Calendar</h2>
+          <p>Sample week of content — copy written, platforms assigned, hashtags ready.</p>
         </div>
 
-        <div className="space-y-px bg-cream-dark border border-cream-dark">
+        <div>
           {calendar.map((item) => (
-            <div key={item.day} className="bg-white p-6 sm:p-8 grid grid-cols-1 md:grid-cols-[140px_1fr] gap-6 items-start">
-              {/* Day + platforms */}
+            <div key={item.day}>
               <div>
-                <p className="font-heading text-xl font-bold text-navy mb-2">{item.day}</p>
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {item.platforms.map(platformIcon)}
+                <p>{item.day}</p>
+                <div>
+                  {item.platforms.map(platformLabel)}
                 </div>
-                <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold">{item.format}</p>
+                <p>{item.format}</p>
               </div>
-
-              {/* Copy + tags */}
               <div>
-                <div className="bg-cream border-l-2 border-gold px-5 py-4 mb-4">
-                  <p className="font-sans text-sm text-text leading-relaxed whitespace-pre-line">{item.copy}</p>
-                </div>
-                <p className="font-sans text-xs text-blue">{item.tags}</p>
+                <p>{item.copy}</p>
+                <p>{item.tags}</p>
               </div>
             </div>
           ))}
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* Powered by Boatwork */}
-      <SectionWrapper variant="navy">
-        <div className="text-center">
-          <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mb-6">Powered by</p>
-          <div className="flex justify-center mb-6">
+      <section>
+        <div>
+          <p>Powered by</p>
+          <div>
             <Image
               src={siteData.boatwork.logoUrl}
               alt="Boatwork"
               width={160}
               height={40}
-              className="h-8 w-auto brightness-0 invert opacity-80"
               unoptimized
             />
           </div>
-          <p className="text-white/50 font-sans text-sm max-w-md mx-auto mb-8 leading-relaxed">
+          <p>
             Social media management, website hosting, Boatwork reviews integration, and 24/7 AI support — all in one place.
           </p>
-          <Link
-            href="/contact"
-            className="btn-gold"
-          >
-            Get Started with Boatwork <FiArrowRight className="inline ml-2" />
+          <Link href="/contact">
+            Get Started with Boatwork
           </Link>
         </div>
-      </SectionWrapper>
+      </section>
     </>
   );
 }

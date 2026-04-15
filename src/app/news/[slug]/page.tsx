@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { getSiteData } from '@/lib/siteData';
-import { SectionWrapper } from '@/components/shared';
 
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
@@ -32,7 +31,6 @@ function linkifyContent(text: string): React.ReactNode[] {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-navy underline decoration-gold/40 hover:decoration-gold transition-colors break-all"
       >
         {url}
       </a>,
@@ -84,90 +82,67 @@ export default async function NewsSlugPage({
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-hero-gradient text-white py-24 px-4 text-center">
-        <div className="max-w-7xl mx-auto">
-          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
-          <h1 className="font-heading text-4xl md:text-5xl font-extrabold tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
-            {update.title ?? 'Update'}
-          </h1>
-          <p className="text-white/60 font-sans text-base">
-            {formatDate(update.publishedAt)}
-          </p>
+      <section>
+        <div>
+          <h1>{update.title ?? 'Update'}</h1>
+          <p>{formatDate(update.publishedAt)}</p>
         </div>
       </section>
 
-      <SectionWrapper variant="cream">
-        <div className="max-w-2xl mx-auto">
-          {/* Back link */}
-          <Link
-            href="/news"
-            className="inline-flex items-center gap-1 text-text-light font-sans text-sm hover:text-navy transition-colors mb-8"
-          >
+      <section>
+        <div>
+          <Link href="/news">
             ← Back to News
           </Link>
 
-          <article className="bg-white border border-cream-dark p-8 flex flex-col gap-6">
-            {/* Hero image */}
+          <article>
             {hasImage && (
-              <div className="rounded-lg overflow-hidden -mx-0">
+              <div>
                 <img
                   src={update.imageUrl!}
                   alt={update.imageAlt ?? update.title ?? ''}
-                  className="w-full max-h-[28rem] object-cover rounded-lg"
                 />
               </div>
             )}
 
-            {/* Full content */}
-            <div className="text-text font-sans leading-relaxed whitespace-pre-line text-base">
+            <div>
               {linkifyContent(update.content)}
             </div>
 
-            {/* Link preview card */}
             {hasLinkPreview && (
               <a
                 href={update.linkUrl!}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block border border-cream-dark rounded-lg overflow-hidden hover:border-gold/40 transition-colors"
               >
                 {update.linkImage && (
-                  <div className="relative w-full h-52 bg-cream">
+                  <div>
                     <img
                       src={update.linkImage}
                       alt={update.linkTitle ?? ''}
-                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
-                <div className="p-5">
-                  <p className="font-heading font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
+                <div>
+                  <p>{update.linkTitle}</p>
                   {update.linkDescription && (
-                    <p className="text-text-light font-sans text-sm leading-relaxed line-clamp-3 mb-2">
-                      {update.linkDescription}
-                    </p>
+                    <p>{update.linkDescription}</p>
                   )}
                   {update.linkDomain && (
-                    <p className="text-text-light/60 font-sans text-xs">{update.linkDomain}</p>
+                    <p>{update.linkDomain}</p>
                   )}
                 </div>
               </a>
             )}
           </article>
 
-          {/* Back link bottom */}
-          <div className="mt-8">
-            <Link
-              href="/news"
-              className="inline-flex items-center gap-1 text-text-light font-sans text-sm hover:text-navy transition-colors"
-            >
+          <div>
+            <Link href="/news">
               ← Back to News
             </Link>
           </div>
         </div>
-      </SectionWrapper>
-
+      </section>
     </>
   );
 }
