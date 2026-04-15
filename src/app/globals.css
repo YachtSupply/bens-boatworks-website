@@ -3,126 +3,149 @@
 @tailwind utilities;
 
 /* ============================================================
-   CSS Variable Palette System — Coastal Edge
-   Modern coastal design with teal primaries and warm coral accents.
+   CSS Variable Palette System
    Each [data-theme] block defines the full set of CSS custom
    properties. :root defaults live in @layer base so an external
-   theme.css (un-layered) always wins in the cascade.
+   theme.css (un-layered) always wins in the cascade. When
+   BOATWORK_URL is set the <html> element has no data-theme
+   attribute and the external stylesheet is the sole source of
+   variables. When BOATWORK_URL is not set data-theme is applied
+   and the un-layered [data-theme='navy-gold'] block wins.
    ============================================================ */
 
 @layer base {
   :root {
-    --color-primary:           #0d3b4f;
-    --color-primary-rgb:       13 59 79;
-    --color-primary-light:     #1a5f7a;
-    --color-primary-light-rgb: 26 95 122;
-    --color-accent:            #e8673a;
-    --color-accent-rgb:        232 103 58;
-    --color-accent-dark:       #c9512a;
-    --color-accent-dark-rgb:   201 81 42;
-    --color-accent-light:      #f09070;
-    --color-accent-light-rgb:  240 144 112;
-    --color-bg:                #f8f6f3;
-    --color-bg-rgb:            248 246 243;
-    --color-bg-dark:           #eae5de;
-    --color-bg-dark-rgb:       234 229 222;
-    --color-text:              #1c2530;
-    --color-text-light:        #64748b;
+    --color-primary:           #0a1628;
+    --color-primary-rgb:       10 22 40;
+    --color-primary-light:     #2a3858;
+    --color-primary-light-rgb: 42 56 88;
+    --color-accent:            #c9a96e;
+    --color-accent-rgb:        201 169 110;
+    --color-accent-dark:       #8a6b38;
+    --color-accent-dark-rgb:   138 107 56;
+    --color-accent-light:      #dfc190;
+    --color-accent-light-rgb:  223 193 144;
+    --color-bg:                #faf8f4;
+    --color-bg-rgb:            250 248 244;
+    --color-bg-dark:           #ede8e0;
+    --color-bg-dark-rgb:       237 232 224;
+    --color-text:              #1a1a2e;
+    --color-text-light:        #5a6a7a;
     --color-white:             #ffffff;
   }
 }
 
-[data-theme='coastal-teal'] {
-  --color-primary:           #0d3b4f;
-  --color-primary-rgb:       13 59 79;
-  --color-primary-light:     #1a5f7a;
-  --color-primary-light-rgb: 26 95 122;
-  --color-accent:            #e8673a;
-  --color-accent-rgb:        232 103 58;
-  --color-accent-dark:       #c9512a;
-  --color-accent-dark-rgb:   201 81 42;
-  --color-accent-light:      #f09070;
-  --color-accent-light-rgb:  240 144 112;
-  --color-bg:                #f8f6f3;
-  --color-bg-rgb:            248 246 243;
-  --color-bg-dark:           #eae5de;
-  --color-bg-dark-rgb:       234 229 222;
-  --color-text:              #1c2530;
-  --color-text-light:        #64748b;
+[data-theme='navy-gold'] {
+  --color-primary:           #0a1628;
+  --color-primary-rgb:       10 22 40;
+  --color-primary-light:     #2a3858;
+  --color-primary-light-rgb: 42 56 88;
+  --color-accent:            #c9a96e;
+  --color-accent-rgb:        201 169 110;
+  --color-accent-dark:       #8a6b38;
+  --color-accent-dark-rgb:   138 107 56;
+  --color-accent-light:      #dfc190;
+  --color-accent-light-rgb:  223 193 144;
+  --color-bg:                #faf8f4;
+  --color-bg-rgb:            250 248 244;
+  --color-bg-dark:           #ede8e0;
+  --color-bg-dark-rgb:       237 232 224;
+  --color-text:              #1a1a2e;
+  --color-text-light:        #5a6a7a;
   --color-white:             #ffffff;
 }
 
-[data-theme='pacific-blue'] {
-  --color-primary:           #0d4b6b;
-  --color-primary-rgb:       13 75 107;
-  --color-primary-light:     #1670a0;
-  --color-primary-light-rgb: 22 112 160;
-  --color-accent:            #f59e0b;
-  --color-accent-rgb:        245 158 11;
-  --color-accent-dark:       #d48a09;
-  --color-accent-dark-rgb:   212 138 9;
-  --color-accent-light:      #fbbf40;
-  --color-accent-light-rgb:  251 191 64;
-  --color-bg:                #f5f8fa;
-  --color-bg-rgb:            245 248 250;
-  --color-bg-dark:           #dde5ec;
-  --color-bg-dark-rgb:       221 229 236;
-  --color-text:              #0f2a3d;
-  --color-text-light:        #4a6a82;
+[data-theme='ocean-blue'] {
+  --color-primary:           #0077b6;
+  --color-primary-rgb:       0 119 182;
+  --color-primary-light:     #0096d6;
+  --color-primary-light-rgb: 0 150 214;
+  --color-accent:            #ffffff;
+  --color-accent-rgb:        255 255 255;
+  --color-accent-dark:       #c8d8e8;
+  --color-accent-dark-rgb:   200 216 232;
+  --color-accent-light:      #ffffff;
+  --color-accent-light-rgb:  255 255 255;
+  --color-bg:                #f0f8ff;
+  --color-bg-rgb:            240 248 255;
+  --color-bg-dark:           #d0e8f8;
+  --color-bg-dark-rgb:       208 232 248;
+  --color-text:              #023e8a;
+  --color-text-light:        #2563a8;
   --color-white:             #ffffff;
 }
 
-[data-theme='deep-charcoal'] {
-  --color-primary:           #1c2530;
-  --color-primary-rgb:       28 37 48;
-  --color-primary-light:     #2e3b4a;
-  --color-primary-light-rgb: 46 59 74;
-  --color-accent:            #e8673a;
-  --color-accent-rgb:        232 103 58;
-  --color-accent-dark:       #c9512a;
-  --color-accent-dark-rgb:   201 81 42;
-  --color-accent-light:      #f09070;
-  --color-accent-light-rgb:  240 144 112;
-  --color-bg:                #f5f5f5;
-  --color-bg-rgb:            245 245 245;
-  --color-bg-dark:           #e0e0e0;
-  --color-bg-dark-rgb:       224 224 224;
+[data-theme='dark-slate'] {
+  --color-primary:           #2d3748;
+  --color-primary-rgb:       45 55 72;
+  --color-primary-light:     #4a5568;
+  --color-primary-light-rgb: 74 85 104;
+  --color-accent:            #38b2ac;
+  --color-accent-rgb:        56 178 172;
+  --color-accent-dark:       #2c8c86;
+  --color-accent-dark-rgb:   44 140 134;
+  --color-accent-light:      #4fd1cb;
+  --color-accent-light-rgb:  79 209 203;
+  --color-bg:                #f7fafc;
+  --color-bg-rgb:            247 250 252;
+  --color-bg-dark:           #edf2f7;
+  --color-bg-dark-rgb:       237 242 247;
+  --color-text:              #1a202c;
+  --color-text-light:        #4a5568;
+  --color-white:             #ffffff;
+}
+
+[data-theme='charcoal-coral'] {
+  --color-primary:           #2d2d2d;
+  --color-primary-rgb:       45 45 45;
+  --color-primary-light:     #4a4a4a;
+  --color-primary-light-rgb: 74 74 74;
+  --color-accent:            #ff6b6b;
+  --color-accent-rgb:        255 107 107;
+  --color-accent-dark:       #cc4444;
+  --color-accent-dark-rgb:   204 68 68;
+  --color-accent-light:      #ff9898;
+  --color-accent-light-rgb:  255 152 152;
+  --color-bg:                #fff9f9;
+  --color-bg-rgb:            255 249 249;
+  --color-bg-dark:           #ffe8e8;
+  --color-bg-dark-rgb:       255 232 232;
   --color-text:              #1a1a1a;
   --color-text-light:        #666666;
   --color-white:             #ffffff;
 }
 
 [data-theme='forest-green'] {
-  --color-primary:           #1a4035;
-  --color-primary-rgb:       26 64 53;
-  --color-primary-light:     #2a6050;
-  --color-primary-light-rgb: 42 96 80;
-  --color-accent:            #d97706;
-  --color-accent-rgb:        217 119 6;
-  --color-accent-dark:       #b86305;
-  --color-accent-dark-rgb:   184 99 5;
-  --color-accent-light:      #f5a623;
-  --color-accent-light-rgb:  245 166 35;
-  --color-bg:                #f5f7f4;
-  --color-bg-rgb:            245 247 244;
-  --color-bg-dark:           #dde5d8;
-  --color-bg-dark-rgb:       221 229 216;
-  --color-text:              #1a2e22;
-  --color-text-light:        #4a6a55;
+  --color-primary:           #2d5016;
+  --color-primary-rgb:       45 80 22;
+  --color-primary-light:     #3d6820;
+  --color-primary-light-rgb: 61 104 32;
+  --color-accent:            #f4e4c1;
+  --color-accent-rgb:        244 228 193;
+  --color-accent-dark:       #c4a870;
+  --color-accent-dark-rgb:   196 168 112;
+  --color-accent-light:      #fff0d8;
+  --color-accent-light-rgb:  255 240 216;
+  --color-bg:                #f9f6f0;
+  --color-bg-rgb:            249 246 240;
+  --color-bg-dark:           #ede8da;
+  --color-bg-dark-rgb:       237 232 218;
+  --color-text:              #1a2e0a;
+  --color-text-light:        #5a7040;
   --color-white:             #ffffff;
 }
 
-[data-theme='midnight'] {
-  --color-primary:           #0a0a0a;
-  --color-primary-rgb:       10 10 10;
-  --color-primary-light:     #1a1a1a;
-  --color-primary-light-rgb: 26 26 26;
-  --color-accent:            #e8673a;
-  --color-accent-rgb:        232 103 58;
-  --color-accent-dark:       #c9512a;
-  --color-accent-dark-rgb:   201 81 42;
-  --color-accent-light:      #f09070;
-  --color-accent-light-rgb:  240 144 112;
+[data-theme='black-silver'] {
+  --color-primary:           #111111;
+  --color-primary-rgb:       17 17 17;
+  --color-primary-light:     #333333;
+  --color-primary-light-rgb: 51 51 51;
+  --color-accent:            #c0c0c0;
+  --color-accent-rgb:        192 192 192;
+  --color-accent-dark:       #909090;
+  --color-accent-dark-rgb:   144 144 144;
+  --color-accent-light:      #e0e0e0;
+  --color-accent-light-rgb:  224 224 224;
   --color-bg:                #f5f5f5;
   --color-bg-rgb:            245 245 245;
   --color-bg-dark:           #e0e0e0;
@@ -132,27 +155,7 @@
   --color-white:             #ffffff;
 }
 
-[data-theme='coastal-sage'] {
-  --color-primary:           #3a5a4e;
-  --color-primary-rgb:       58 90 78;
-  --color-primary-light:     #4d7868;
-  --color-primary-light-rgb: 77 120 104;
-  --color-accent:            #c2845a;
-  --color-accent-rgb:        194 132 90;
-  --color-accent-dark:       #a06840;
-  --color-accent-dark-rgb:   160 104 64;
-  --color-accent-light:      #daa878;
-  --color-accent-light-rgb:  218 168 120;
-  --color-bg:                #f6f4f0;
-  --color-bg-rgb:            246 244 240;
-  --color-bg-dark:           #e4ddd3;
-  --color-bg-dark-rgb:       228 221 211;
-  --color-text:              #2a3a32;
-  --color-text-light:        #6a7a70;
-  --color-white:             #ffffff;
-}
-
-/* Backwards-compatibility aliases */
+/* Backwards-compatibility aliases — kept so existing CSS/components still work */
 :root,
 [data-theme] {
   --navy:       var(--color-primary);
@@ -178,58 +181,89 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  font-family: var(--font-lato), Lato, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading), 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-weight: 700;
+  font-family: var(--font-playfair), Georgia, serif;
 }
 
 /* ── Hero gradient ── */
 .bg-hero-gradient {
-  background: linear-gradient(160deg, var(--color-primary) 0%, var(--color-primary-light) 50%, var(--color-primary) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 60%, #000) 60%, var(--color-primary) 100%);
 }
 
-/* ── Section divider — thin accent line ── */
-.section-divider {
-  height: 3px;
-  width: 48px;
-  background: var(--color-accent);
-  border-radius: 2px;
-}
-
-.section-divider-center {
-  height: 3px;
-  width: 48px;
-  background: var(--color-accent);
-  border-radius: 2px;
+/* ── Accent rule dividers ── */
+.gold-rule {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent), var(--color-accent-light));
   margin: 0 auto;
 }
 
-/* Backwards compat: gold-rule classes map to section-divider */
-.gold-rule       { height: 3px; width: 48px; background: var(--color-accent); border-radius: 2px; margin: 0 auto; }
-.gold-rule-left  { height: 3px; width: 48px; background: var(--color-accent); border-radius: 2px; margin: 0; }
-.gold-rule-full  { height: 1px; background: var(--color-bg-dark); width: 100%; }
+.gold-rule-left {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-accent-dark), var(--color-accent), var(--color-accent-light));
+  margin: 0;
+}
 
-/* ── Primary CTA button ── */
+.gold-rule-full {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), var(--color-accent-light), var(--color-accent), transparent);
+  width: 100%;
+}
+
+/* ── Wave texture (per-theme SVG background) ── */
+:root .wave-texture,
+[data-theme='navy-gold'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%23c9a96e' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+[data-theme='ocean-blue'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%230077b6' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+[data-theme='dark-slate'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%2338b2ac' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+[data-theme='charcoal-coral'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%23ff6b6b' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+[data-theme='forest-green'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%232d5016' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+[data-theme='black-silver'] .wave-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='60' viewBox='0 0 400 60'%3E%3Cpath d='M0 30 Q50 10 100 30 Q150 50 200 30 Q250 10 300 30 Q350 50 400 30' stroke='%23c0c0c0' stroke-width='0.4' fill='none' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 400px 60px;
+}
+
+/* ── Accent CTA button ── */
 .btn-gold {
-  background: var(--color-accent);
+  background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent));
   color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-  border: none;
-  border-radius: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-accent);
   display: inline-block;
   text-decoration: none;
 }
 
 .btn-gold:hover {
-  background: var(--color-accent-dark);
-  box-shadow: 0 4px 16px rgb(var(--color-accent-rgb) / 0.35);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  box-shadow: 0 4px 20px rgb(var(--color-accent-rgb) / 0.4);
   transform: translateY(-1px);
 }
 
@@ -237,42 +271,41 @@ h1, h2, h3, h4, h5, h6 {
 .btn-outline-light {
   background: transparent;
   color: #fff;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  font-size: 0.875rem;
-  border: 2px solid rgba(255,255,255,0.4);
-  border-radius: 8px;
-  transition: all 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255,255,255,0.5);
+  transition: all 0.3s ease;
   display: inline-block;
   text-decoration: none;
 }
 
 .btn-outline-light:hover {
   background: rgba(255,255,255,0.1);
-  border-color: #fff;
+  border-color: var(--color-accent);
+  color: var(--color-accent-light);
 }
 
 /* ── Service card hover ── */
 .service-card {
-  transition: all 0.25s ease;
-  border: 1px solid var(--color-bg-dark);
-  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
 }
 
 .service-card:hover {
-  border-color: rgb(var(--color-accent-rgb) / 0.3);
-  box-shadow: 0 12px 40px rgb(var(--color-primary-rgb) / 0.08);
-  transform: translateY(-4px);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 32px rgb(var(--color-primary-rgb) / 0.12), 0 0 0 1px rgb(var(--color-accent-rgb) / 0.15);
+  transform: translateY(-2px);
 }
 
 /* ── Review card hover ── */
 .review-card {
-  transition: all 0.25s ease;
-  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .review-card:hover {
-  box-shadow: 0 8px 30px rgb(var(--color-primary-rgb) / 0.08);
+  box-shadow: 0 8px 32px rgb(var(--color-primary-rgb) / 0.1);
   transform: translateY(-2px);
 }
 
@@ -280,7 +313,6 @@ h1, h2, h3, h4, h5, h6 {
 .portfolio-item {
   overflow: hidden;
   position: relative;
-  border-radius: 12px;
 }
 
 .portfolio-item img {
@@ -291,6 +323,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.05);
 }
 
+/* Portfolio overlay — CSS hover (safe for server components) */
 .portfolio-item .portfolio-overlay {
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -302,38 +335,37 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Navbar link styling ── */
 .navbar-link {
-  color: var(--color-text);
+  color: rgba(245, 240, 232, 0.85);
   position: relative;
-  font-weight: 500;
-  transition: color 0.2s ease;
 }
 
 .navbar-link::after {
   content: '';
   position: absolute;
-  bottom: -4px;
+  bottom: -2px;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: var(--color-accent);
-  border-radius: 1px;
   transform: scaleX(0);
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .navbar-link:hover {
-  color: var(--color-primary);
+  color: var(--color-accent-light);
 }
 
 .navbar-link:hover::after {
   transform: scaleX(1);
 }
 
-/* ── Stat number accent ── */
+/* ── Stat number accent gradient ── */
 .stat-number {
-  font-family: var(--font-heading), 'Plus Jakarta Sans', system-ui, sans-serif;
-  color: var(--color-accent);
-  font-weight: 800;
+  font-family: var(--font-playfair), Georgia, serif;
+  background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 /* ── Tailwind custom color extensions via CSS ── */
@@ -344,8 +376,8 @@ h1, h2, h3, h4, h5, h6 {
 .bg-gold    { background-color: var(--color-accent); }
 .bg-cream   { background-color: var(--color-bg); }
 .border-gold { border-color: var(--color-accent); }
-.font-serif { font-family: var(--font-heading), 'Plus Jakarta Sans', system-ui, sans-serif; }
-.font-sans  { font-family: var(--font-inter), Inter, system-ui, sans-serif; }
+.font-serif { font-family: var(--font-playfair), Georgia, serif; }
+.font-sans  { font-family: var(--font-lato), Lato, sans-serif; }
 
 /* ── Lightbox customization ── */
 .yarl__container {
@@ -359,18 +391,4 @@ h1, h2, h3, h4, h5, h6 {
 
 .yarl__button:hover {
   background: rgb(var(--color-accent-rgb) / 0.15) !important;
-}
-
-/* ── Accent badge ── */
-.accent-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
-  background: rgb(var(--color-accent-rgb) / 0.1);
-  color: var(--color-accent-dark);
-  border-radius: 100px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
 }
