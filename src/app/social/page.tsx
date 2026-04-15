@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { GiAnchor } from 'react-icons/gi';
-import { FiInstagram, FiFacebook, FiCamera, FiMessageSquare, FiStar, FiSun } from 'react-icons/fi';
+import { FiInstagram, FiFacebook, FiCamera, FiMessageSquare, FiStar, FiSun, FiArrowRight } from 'react-icons/fi';
 import { SectionWrapper } from '@/components/shared';
 import { getSiteData } from '@/lib/siteData';
 
@@ -119,13 +118,9 @@ export default async function SocialPage() {
       {/* Hero */}
       <section className="bg-hero-gradient text-white py-24 px-4 text-center">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={18} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h1 className="font-serif text-5xl font-bold mb-4">Social Media</h1>
-          <p className="text-slate-300 font-sans max-w-xl mx-auto">
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h1 className="font-heading text-5xl font-extrabold tracking-tight mb-4">Social Media</h1>
+          <p className="text-white/50 font-sans max-w-xl mx-auto">
             Managed social media marketing for {siteData.name} — powered by Boatwork.
           </p>
           <div className="flex items-center justify-center gap-6 mt-8">
@@ -145,17 +140,11 @@ export default async function SocialPage() {
         </div>
       </section>
 
-      <div className="gold-rule-full" />
-
       {/* Strategy Overview */}
       <SectionWrapper variant="cream">
         <div className="text-center mb-14">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={20} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h2 className="font-serif text-4xl font-bold text-navy mb-4">Our Strategy</h2>
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h2 className="font-heading text-4xl font-extrabold tracking-tight text-navy mb-4">Our Strategy</h2>
           <p className="text-text-light font-sans max-w-2xl mx-auto leading-relaxed">
             Four content pillars, seven posts per week across Instagram and Facebook. Every post uses real photos from our work — no stock, no filler.
           </p>
@@ -164,19 +153,19 @@ export default async function SocialPage() {
         {/* Frequency badges */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-serif text-3xl font-bold text-navy">4x</p>
+            <p className="font-heading text-3xl font-bold text-navy">4x</p>
             <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Instagram / week</p>
           </div>
           <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-serif text-3xl font-bold text-navy">3x</p>
+            <p className="font-heading text-3xl font-bold text-navy">3x</p>
             <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Facebook / week</p>
           </div>
           <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-serif text-3xl font-bold text-navy">7</p>
+            <p className="font-heading text-3xl font-bold text-navy">7</p>
             <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Total posts / week</p>
           </div>
           <div className="bg-white border border-cream-dark px-6 py-4 text-center">
-            <p className="font-serif text-3xl font-bold text-navy">0</p>
+            <p className="font-heading text-3xl font-bold text-navy">0</p>
             <p className="text-xs font-sans font-semibold uppercase tracking-widest text-gold mt-1">Stock photos used</p>
           </div>
         </div>
@@ -187,7 +176,7 @@ export default async function SocialPage() {
             <div key={p.label} className="bg-white p-8">
               <div className="text-gold mb-4">{p.icon}</div>
               <div className="flex items-baseline gap-2 mb-3">
-                <p className="font-serif text-lg font-bold text-navy">{p.label}</p>
+                <p className="font-heading text-lg font-bold text-navy">{p.label}</p>
                 <span className="text-xs font-sans font-semibold text-gold">{p.pct}</span>
               </div>
               <p className="text-text-light font-sans text-sm leading-relaxed">{p.description}</p>
@@ -196,17 +185,11 @@ export default async function SocialPage() {
         </div>
       </SectionWrapper>
 
-      <div className="gold-rule-full" />
-
       {/* Content Calendar */}
       <SectionWrapper variant="white">
         <div className="text-center mb-14">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={20} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h2 className="font-serif text-4xl font-bold text-navy mb-4">Weekly Content Calendar</h2>
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h2 className="font-heading text-4xl font-extrabold tracking-tight text-navy mb-4">Weekly Content Calendar</h2>
           <p className="text-text-light font-sans max-w-xl mx-auto">
             Sample week of content — copy written, platforms assigned, hashtags ready.
           </p>
@@ -217,7 +200,7 @@ export default async function SocialPage() {
             <div key={item.day} className="bg-white p-6 sm:p-8 grid grid-cols-1 md:grid-cols-[140px_1fr] gap-6 items-start">
               {/* Day + platforms */}
               <div>
-                <p className="font-serif text-xl font-bold text-navy mb-2">{item.day}</p>
+                <p className="font-heading text-xl font-bold text-navy mb-2">{item.day}</p>
                 <div className="flex flex-wrap gap-1.5 mb-3">
                   {item.platforms.map(platformIcon)}
                 </div>
@@ -236,8 +219,6 @@ export default async function SocialPage() {
         </div>
       </SectionWrapper>
 
-      <div className="gold-rule-full" />
-
       {/* Powered by Boatwork */}
       <SectionWrapper variant="navy">
         <div className="text-center">
@@ -252,14 +233,14 @@ export default async function SocialPage() {
               unoptimized
             />
           </div>
-          <p className="text-slate-300 font-sans text-sm max-w-md mx-auto mb-8 leading-relaxed">
+          <p className="text-white/50 font-sans text-sm max-w-md mx-auto mb-8 leading-relaxed">
             Social media management, website hosting, Boatwork reviews integration, and 24/7 AI support — all in one place.
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-gold text-navy font-sans font-bold px-10 py-4 hover:bg-gold-light transition-colors uppercase tracking-widest text-sm whitespace-nowrap"
+            className="btn-gold"
           >
-            Get Started with Boatwork
+            Get Started with Boatwork <FiArrowRight className="inline ml-2" />
           </Link>
         </div>
       </SectionWrapper>

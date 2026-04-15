@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { GiAnchor } from 'react-icons/gi';
+import { FiArrowRight } from 'react-icons/fi';
 import { FiMapPin } from 'react-icons/fi';
 import { getSiteData } from '@/lib/siteData';
 import { SectionWrapper, SafeHtmlImage } from '@/components/shared';
@@ -84,7 +84,7 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
       : update.content;
 
     return (
-      <article className="bg-white border border-cream-dark p-8 flex flex-col gap-5">
+      <article className="bg-white border border-cream-dark rounded-2xl p-8 flex flex-col gap-5">
         {/* Header */}
         <div className="flex items-center gap-3">
           {logoUrl ? (
@@ -93,19 +93,19 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
               alt={businessName}
               className="w-12 h-12 rounded-full object-cover border border-cream-dark flex-shrink-0"
               placeholderContent={
-                <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-serif font-bold text-base flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
                   {businessName.charAt(0)}
                 </div>
               }
               showPlaceholder
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-serif font-bold text-base flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
               {businessName.charAt(0)}
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <p className="font-serif font-semibold text-navy truncate">{businessName}</p>
+            <p className="font-heading font-semibold text-navy truncate">{businessName}</p>
             <p className="text-text-light text-sm font-sans">{formatRelativeTime(update.publishedAt)}</p>
           </div>
           {update.isPinned && (
@@ -118,7 +118,7 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
 
         {/* Long-form title */}
         {update.title && (
-          <h2 className="font-serif text-2xl font-bold text-navy leading-snug">
+          <h2 className="font-heading text-2xl font-bold text-navy leading-snug">
             {update.title}
           </h2>
         )}
@@ -142,7 +142,7 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
   }
 
   return (
-    <article className="bg-white border border-cream-dark p-8 flex flex-col gap-5">
+    <article className="bg-white border border-cream-dark rounded-2xl p-8 flex flex-col gap-5">
       {/* Header */}
       <div className="flex items-center gap-3">
         {logoUrl ? (
@@ -151,19 +151,19 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
             alt={businessName}
             className="w-12 h-12 rounded-full object-cover border border-cream-dark flex-shrink-0"
             placeholderContent={
-              <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-serif font-bold text-base flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
                 {businessName.charAt(0)}
               </div>
             }
             showPlaceholder
           />
         ) : (
-          <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-serif font-bold text-base flex-shrink-0">
+          <div className="w-12 h-12 rounded-full bg-gold text-navy flex items-center justify-center font-heading font-bold text-base flex-shrink-0">
             {businessName.charAt(0)}
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <p className="font-serif font-semibold text-navy truncate">{businessName}</p>
+          <p className="font-heading font-semibold text-navy truncate">{businessName}</p>
           <p className="text-text-light text-sm font-sans">{formatRelativeTime(update.publishedAt)}</p>
         </div>
         {update.isPinned && (
@@ -197,7 +197,7 @@ function UpdatePost({ update, businessName, logoUrl }: { update: BoatworkUpdate;
             </div>
           )}
           <div className="p-5">
-            <p className="font-serif font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
+            <p className="font-heading font-bold text-navy mb-1 line-clamp-2">{update.linkTitle}</p>
             {update.linkDescription && (
               <p className="text-text-light font-sans text-sm leading-relaxed line-clamp-3 mb-2">
                 {update.linkDescription}
@@ -237,22 +237,16 @@ export default async function NewsPage() {
       {/* Hero */}
       <section className="bg-hero-gradient text-white py-24 px-4 text-center">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-8 bg-gold/60" />
-            <GiAnchor className="text-gold" size={18} />
-            <div className="h-px w-8 bg-gold/60" />
-          </div>
-          <h1 className="font-serif text-5xl font-bold mb-4">News & Updates</h1>
-          <p className="text-gold-light font-serif text-xl italic">
+          <div className="section-divider-center mb-5" style={{ background: 'rgba(255,255,255,0.3)' }} />
+          <h1 className="font-heading text-5xl font-extrabold mb-4 tracking-tight">News & Updates</h1>
+          <p className="text-white/60 font-sans text-lg">
             The latest from {siteConfig.name}
           </p>
         </div>
       </section>
 
-      <div className="gold-rule-full" />
-
       <SectionWrapper variant="cream">
-        <div className="max-w-2xl mx-auto space-y-8">
+        <div className="max-w-2xl mx-auto space-y-6">
           {updates.map((update) => (
             <UpdatePost
               key={update.id}
@@ -264,25 +258,18 @@ export default async function NewsPage() {
         </div>
       </SectionWrapper>
 
-      <div className="gold-rule-full" />
-
       {/* CTA */}
       <SectionWrapper variant="navy">
-        <div className="text-center">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-gold/40" />
-            <GiAnchor className="text-gold" size={20} />
-            <div className="h-px w-12 bg-gold/40" />
-          </div>
-          <h2 className="font-serif text-4xl font-bold mb-4">Need Marine Services?</h2>
-          <p className="text-slate-300 font-sans mb-8 max-w-xl mx-auto">
+        <div className="text-center py-8">
+          <h2 className="font-heading text-4xl font-extrabold mb-4 tracking-tight">Need Marine Services?</h2>
+          <p className="text-white/50 font-sans mb-8 max-w-xl mx-auto text-lg">
             Contact our team today to discuss your vessel and get a personalized quote.
           </p>
           <Link
             href="/contact"
-            className="inline-block bg-gold text-navy font-sans font-bold px-10 py-4 hover:bg-gold-light transition-colors uppercase tracking-widest text-sm whitespace-nowrap"
+            className="btn-gold inline-flex items-center gap-2 px-8 py-4 whitespace-nowrap"
           >
-            Get a Quote
+            Get a Quote <FiArrowRight size={14} />
           </Link>
         </div>
       </SectionWrapper>
