@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getSiteData } from '@/lib/siteData';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getSiteData();
@@ -101,102 +102,117 @@ function getInstagramHandle(url: string): string {
 
 const platformLabel = (p: string) =>
   p === 'instagram'
-    ? <span key="ig">Instagram</span>
-    : <span key="fb">Facebook</span>;
+    ? <span key="ig" className="text-[11px] font-semibold uppercase tracking-wider bg-accent/10 text-accent px-2.5 py-1 rounded-full">Instagram</span>
+    : <span key="fb" className="text-[11px] font-semibold uppercase tracking-wider bg-brand/10 text-brand px-2.5 py-1 rounded-full">Facebook</span>;
 
 export default async function SocialPage() {
   const siteData = await getSiteData();
   const calendar = buildCalendar(siteData.name, siteData.phone, siteData.city);
   return (
     <>
-      <section>
-        <div>
-          <h1>Social Media</h1>
-          <p>Managed social media marketing for {siteData.name} — powered by Boatwork.</p>
-          <div>
-            {siteData.social.instagram && (
-              <a href={siteData.social.instagram} target="_blank" rel="noopener noreferrer">
-                {getInstagramHandle(siteData.social.instagram)}
-              </a>
-            )}
-            {siteData.social.facebook && (
-              <a href={siteData.social.facebook} target="_blank" rel="noopener noreferrer">
-                Facebook
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section>
-        <div>
-          <h2>Our Strategy</h2>
-          <p>
-            Four content pillars, seven posts per week across Instagram and Facebook. Every post uses real photos from our work — no stock, no filler.
-          </p>
-        </div>
-
-        <div>
-          <div>
-            <p>4x</p>
-            <p>Instagram / week</p>
-          </div>
-          <div>
-            <p>3x</p>
-            <p>Facebook / week</p>
-          </div>
-          <div>
-            <p>7</p>
-            <p>Total posts / week</p>
-          </div>
-          <div>
-            <p>0</p>
-            <p>Stock photos used</p>
-          </div>
-        </div>
-
-        <div>
-          {pillars.map((p) => (
-            <div key={p.label}>
-              <div>
-                <p>{p.label}</p>
-                <span>{p.pct}</span>
-              </div>
-              <p>{p.description}</p>
+      {/* ─── HERO ─── */}
+      <section className="bg-brand text-white pt-[72px]">
+        <div className="max-w-page mx-auto px-5 sm:px-8 py-20 md:py-28">
+          <div className="max-w-2xl">
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-3">Social Media</p>
+            <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-white tracking-tight mb-4">Social Media</h1>
+            <p className="text-white/50 text-base leading-relaxed mb-6">Managed social media marketing for {siteData.name} — powered by Boatwork.</p>
+            <div className="flex flex-wrap gap-3">
+              {siteData.social.instagram && (
+                <a href={siteData.social.instagram} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-accent text-sm font-semibold transition-colors flex items-center gap-1.5">
+                  {getInstagramHandle(siteData.social.instagram)} <ArrowUpRight size={13} strokeWidth={2} />
+                </a>
+              )}
+              {siteData.social.facebook && (
+                <a href={siteData.social.facebook} target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-accent text-sm font-semibold transition-colors flex items-center gap-1.5">
+                  Facebook <ArrowUpRight size={13} strokeWidth={2} />
+                </a>
+              )}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      <section>
-        <div>
-          <h2>Weekly Content Calendar</h2>
-          <p>Sample week of content — copy written, platforms assigned, hashtags ready.</p>
-        </div>
+      {/* ─── STRATEGY ─── */}
+      <section className="bg-white py-24 px-5 sm:px-8">
+        <div className="max-w-page mx-auto">
+          <div className="max-w-2xl mb-14">
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">Strategy</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight mb-4">Our Strategy</h2>
+            <p className="text-ink-muted text-base leading-relaxed">
+              Four content pillars, seven posts per week across Instagram and Facebook. Every post uses real photos from our work — no stock, no filler.
+            </p>
+          </div>
 
-        <div>
-          {calendar.map((item) => (
-            <div key={item.day}>
-              <div>
-                <p>{item.day}</p>
-                <div>
-                  {item.platforms.map(platformLabel)}
+          {/* Stats row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+            <div className="bg-sand rounded-2xl p-6 text-center">
+              <p className="font-heading text-3xl font-extrabold text-accent">4x</p>
+              <p className="text-ink-muted text-sm mt-1">Instagram / week</p>
+            </div>
+            <div className="bg-sand rounded-2xl p-6 text-center">
+              <p className="font-heading text-3xl font-extrabold text-accent">3x</p>
+              <p className="text-ink-muted text-sm mt-1">Facebook / week</p>
+            </div>
+            <div className="bg-sand rounded-2xl p-6 text-center">
+              <p className="font-heading text-3xl font-extrabold text-accent">7</p>
+              <p className="text-ink-muted text-sm mt-1">Total posts / week</p>
+            </div>
+            <div className="bg-sand rounded-2xl p-6 text-center">
+              <p className="font-heading text-3xl font-extrabold text-accent">0</p>
+              <p className="text-ink-muted text-sm mt-1">Stock photos used</p>
+            </div>
+          </div>
+
+          {/* Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {pillars.map((p) => (
+              <div key={p.label} className="bg-sand rounded-2xl p-7">
+                <div className="flex items-center justify-between mb-3">
+                  <p className="font-heading font-extrabold text-brand">{p.label}</p>
+                  <span className="text-accent font-heading font-extrabold text-lg">{p.pct}</span>
                 </div>
-                <p>{item.format}</p>
+                <p className="text-ink-muted text-sm leading-relaxed">{p.description}</p>
               </div>
-              <div>
-                <p>{item.copy}</p>
-                <p>{item.tags}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
-      <section>
-        <div>
-          <p>Powered by</p>
-          <div>
+      {/* ─── CALENDAR ─── */}
+      <section className="bg-sand py-24 px-5 sm:px-8">
+        <div className="max-w-page mx-auto">
+          <div className="max-w-2xl mb-14">
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2">Calendar</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-extrabold text-brand tracking-tight mb-4">Weekly Content Calendar</h2>
+            <p className="text-ink-muted text-base leading-relaxed">Sample week of content — copy written, platforms assigned, hashtags ready.</p>
+          </div>
+
+          <div className="space-y-4">
+            {calendar.map((item) => (
+              <div key={item.day} className="bg-white rounded-2xl p-6 md:p-7">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
+                  <p className="font-heading font-extrabold text-brand text-lg">{item.day}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {item.platforms.map(platformLabel)}
+                  </div>
+                  <p className="text-ink-light text-[12px] uppercase tracking-wider sm:ml-auto">{item.format}</p>
+                </div>
+                <div className="border-t border-sand pt-4">
+                  <p className="text-ink-muted text-sm leading-relaxed whitespace-pre-line mb-3">{item.copy}</p>
+                  <p className="text-accent text-[12px]">{item.tags}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── POWERED BY ─── */}
+      <section className="bg-brand py-24 px-5 sm:px-8">
+        <div className="max-w-page mx-auto text-center max-w-2xl">
+          <p className="text-white/40 text-[11px] font-semibold uppercase tracking-[0.15em] mb-6">Powered by</p>
+          <div className="flex justify-center mb-6">
             <Image
               src={siteData.boatwork.logoUrl}
               alt="Boatwork"
@@ -205,11 +221,11 @@ export default async function SocialPage() {
               unoptimized
             />
           </div>
-          <p>
+          <p className="text-white/50 text-base leading-relaxed mb-8">
             Social media management, website hosting, Boatwork reviews integration, and 24/7 AI support — all in one place.
           </p>
-          <Link href="/contact">
-            Get Started with Boatwork
+          <Link href="/contact" className="bg-accent hover:bg-accent-dark text-white font-semibold text-[12px] uppercase tracking-wider px-7 py-4 rounded-full transition-colors inline-flex items-center gap-2">
+            Get Started with Boatwork <ArrowRight size={14} strokeWidth={2} />
           </Link>
         </div>
       </section>

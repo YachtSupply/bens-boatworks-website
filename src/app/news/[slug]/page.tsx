@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
 import { getSiteData } from '@/lib/siteData';
 
@@ -31,6 +32,7 @@ function linkifyContent(text: string): React.ReactNode[] {
         href={url}
         target="_blank"
         rel="noopener noreferrer"
+        className="text-accent hover:text-accent-dark underline transition-colors"
       >
         {url}
       </a>,
@@ -82,30 +84,36 @@ export default async function NewsSlugPage({
 
   return (
     <>
-      <section>
-        <div>
-          <h1>{update.title ?? 'Update'}</h1>
-          <p>{formatDate(update.publishedAt)}</p>
+      {/* ─── HERO ─── */}
+      <section className="bg-brand text-white pt-[72px]">
+        <div className="max-w-page mx-auto px-5 sm:px-8 py-20 md:py-28">
+          <div className="max-w-3xl">
+            <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-3">News</p>
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">{update.title ?? 'Update'}</h1>
+            <p className="text-white/40 text-sm">{formatDate(update.publishedAt)}</p>
+          </div>
         </div>
       </section>
 
-      <section>
-        <div>
-          <Link href="/news">
-            ← Back to News
+      {/* ─── ARTICLE ─── */}
+      <section className="bg-sand py-24 px-5 sm:px-8">
+        <div className="max-w-3xl mx-auto">
+          <Link href="/news" className="text-accent hover:text-accent-dark text-[13px] font-semibold flex items-center gap-1.5 transition-colors mb-8">
+            <ArrowLeft size={14} strokeWidth={2} /> Back to News
           </Link>
 
-          <article>
+          <article className="bg-white rounded-2xl p-6 md:p-10">
             {hasImage && (
-              <div>
+              <div className="rounded-xl overflow-hidden mb-8 -mx-2 md:-mx-4">
                 <img
                   src={update.imageUrl!}
                   alt={update.imageAlt ?? update.title ?? ''}
+                  className="w-full h-auto"
                 />
               </div>
             )}
 
-            <div>
+            <div className="text-ink text-base leading-relaxed whitespace-pre-line">
               {linkifyContent(update.content)}
             </div>
 
@@ -114,31 +122,33 @@ export default async function NewsSlugPage({
                 href={update.linkUrl!}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="block rounded-xl border border-sand-dark overflow-hidden hover:border-accent/30 transition-colors mt-8"
               >
                 {update.linkImage && (
-                  <div>
+                  <div className="aspect-[2/1] overflow-hidden">
                     <img
                       src={update.linkImage}
                       alt={update.linkTitle ?? ''}
+                      className="w-full h-full object-cover"
                     />
                   </div>
                 )}
-                <div>
-                  <p>{update.linkTitle}</p>
+                <div className="p-4">
+                  <p className="font-heading font-bold text-brand text-sm mb-1">{update.linkTitle}</p>
                   {update.linkDescription && (
-                    <p>{update.linkDescription}</p>
+                    <p className="text-ink-muted text-[13px] line-clamp-2">{update.linkDescription}</p>
                   )}
                   {update.linkDomain && (
-                    <p>{update.linkDomain}</p>
+                    <p className="text-ink-light text-[11px] mt-2">{update.linkDomain}</p>
                   )}
                 </div>
               </a>
             )}
           </article>
 
-          <div>
-            <Link href="/news">
-              ← Back to News
+          <div className="mt-8">
+            <Link href="/news" className="text-accent hover:text-accent-dark text-[13px] font-semibold flex items-center gap-1.5 transition-colors">
+              <ArrowLeft size={14} strokeWidth={2} /> Back to News
             </Link>
           </div>
         </div>

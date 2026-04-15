@@ -182,12 +182,9 @@ export default async function HomePage() {
       )}
 
       {/* ─── SERVICE AREA ─── */}
-      <section className="relative bg-white py-24 px-5 sm:px-8 overflow-hidden" id="service-area">
-        <div className="absolute inset-0 opacity-[0.06]">
-          <ServiceAreaMap localities={siteConfig.serviceArea} />
-        </div>
-        <div className="relative z-10 max-w-2xl">
-          <div className="max-w-page mx-auto">
+      <section className="bg-white py-24 px-5 sm:px-8" id="service-area">
+        <div className="max-w-page mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <div>
             <p className="text-accent text-[11px] font-semibold uppercase tracking-[0.15em] mb-2 flex items-center gap-2">
               <MapPin size={12} strokeWidth={1.5} /> Service Area
             </p>
@@ -198,6 +195,9 @@ export default async function HomePage() {
                 <span key={a} className="text-[13px] font-medium text-brand bg-sand rounded-full px-4 py-2">{a}</span>
               ))}
             </div>
+          </div>
+          <div className="h-80 lg:h-full min-h-[320px] rounded-2xl overflow-hidden bg-sand-dark">
+            <ServiceAreaMap localities={siteConfig.serviceArea} />
           </div>
         </div>
       </section>
