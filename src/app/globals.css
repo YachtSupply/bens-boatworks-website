@@ -52,10 +52,9 @@
   --white:      var(--color-white);
 }
 
-/* Minimal base — design gets applied on top of this */
+/* Minimal base — no design opinions */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { background-color: var(--color-bg); color: var(--color-text); -webkit-font-smoothing: antialiased; }
 
 /* Lightbox (functional, not decorative) */
 .yarl__container { background: rgb(var(--color-primary-rgb) / 0.97) !important; }
