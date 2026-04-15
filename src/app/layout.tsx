@@ -69,7 +69,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="en" {...(!themeCssUrl ? { 'data-theme': data.websiteTheme || 'coastal-teal' } : {})}>
       <head>
-        {/* Fonts will be added by design layer */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
         {themeCssUrl && (
           <link rel="stylesheet" href={themeCssUrl} />
         )}
@@ -78,7 +80,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
+      <body className="font-sans bg-surface antialiased">
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
           strategy="afterInteractive"
