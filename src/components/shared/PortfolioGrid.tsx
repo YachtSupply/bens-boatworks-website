@@ -7,22 +7,9 @@ import Video from 'yet-another-react-lightbox/plugins/video';
 import 'yet-another-react-lightbox/styles.css';
 import 'yet-another-react-lightbox/plugins/captions.css';
 
-interface PortfolioItem {
-  src: string;
-  caption: string;
-}
-
-interface VideoItem {
-  src: string;
-  poster?: string;
-  caption?: string;
-}
-
-interface PortfolioGridProps {
-  items: PortfolioItem[];
-  videos?: VideoItem[];
-  businessName?: string;
-}
+interface PortfolioItem { src: string; caption: string; }
+interface VideoItem { src: string; poster?: string; caption?: string; }
+interface PortfolioGridProps { items: PortfolioItem[]; videos?: VideoItem[]; businessName?: string; }
 
 function getVideoMimeType(src: string): string {
   const ext = src.split('?')[0].split('.').pop()?.toLowerCase();
@@ -46,7 +33,6 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
     video.muted = true;
     video.preload = 'metadata';
     video.src = src;
-
     const capture = () => {
       try {
         const canvas = document.createElement('canvas');
@@ -58,131 +44,58 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
           const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
           if (dataUrl !== 'data:,') setThumb(dataUrl);
         }
-      } catch {
-        // CORS or security error
-      }
+      } catch { /* CORS */ }
     };
-
     const onLoaded = () => { video.currentTime = 0.1; };
     video.addEventListener('loadeddata', onLoaded, { once: true });
     video.addEventListener('seeked', capture, { once: true });
-
-    return () => {
-      video.removeEventListener('loadeddata', onLoaded);
-      video.removeEventListener('seeked', capture);
-      video.src = '';
-    };
+    return () => { video.removeEventListener('loadeddata', onLoaded); video.removeEventListener('seeked', capture); video.src = ''; };
   }, [src, poster]);
 
   const imgSrc = !imgError && (poster || thumb);
-
   if (imgSrc) {
-    return (
-      <Image
-        src={imgSrc}
-        alt={alt}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        className="object-cover group-hover:scale-105 transition-transform duration-500"
-        unoptimized
-        onError={() => setImgError(true)}
-      />
-    );
+    return <Image src={imgSrc} alt={alt} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover" unoptimized onError={() => setImgError(true)} />;
   }
-
-  return (
-    <div className="absolute inset-0 bg-gradient-to-br from-navy to-navy/80" />
-  );
+  return <div style={{ position: 'absolute', inset: 0, background: '#333' }} />;
 }
-
-/* Varied aspect ratios for masonry visual interest */
-const ASPECT_CLASSES = [
-  'aspect-[4/5]',
-  'aspect-[3/2]',
-  'aspect-square',
-  'aspect-[2/3]',
-  'aspect-[3/4]',
-  'aspect-[16/9]',
-];
 
 export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGridProps) {
   const [index, setIndex] = useState(-1);
   const [failedSrcs, setFailedSrcs] = useState<Set<string>>(new Set());
-
-  const markFailed = (src: string) =>
-    setFailedSrcs((prev) => new Set(prev).add(src));
+  const markFailed = (src: string) => setFailedSrcs((prev) => new Set(prev).add(src));
 
   const visibleItems = items.filter((item) => !failedSrcs.has(item.src));
   const visibleVideos = videos.filter((v) => !failedSrcs.has(v.src));
 
-  const imageSlides = visibleItems.map((item) => ({
-    src: item.src,
-    title: item.caption,
-  }));
-
+  const imageSlides = visibleItems.map((item) => ({ src: item.src, title: item.caption }));
   const videoSlides = visibleVideos.map((v) => ({
     type: 'video' as const,
     poster: v.poster || undefined,
     title: v.caption || undefined,
     sources: [{ src: v.src, type: getVideoMimeType(v.src) }],
-    width: 1920,
-    height: 1080,
+    width: 1920, height: 1080,
   }));
-
   const slides = [...imageSlides, ...videoSlides];
 
   return (
     <>
-      {/* Masonry layout via CSS columns */}
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+      <div>
         {visibleItems.map((item, i) => (
-          <button
-            key={item.src}
-            onClick={() => setIndex(i)}
-            className={`relative ${ASPECT_CLASSES[i % ASPECT_CLASSES.length]} w-full overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold mb-3 break-inside-avoid block rounded-xl`}
-          >
+          <button key={item.src} onClick={() => setIndex(i)} style={{ cursor: 'pointer', border: 'none', background: 'none', padding: 0 }}>
             <Image
               src={item.src}
-              alt={item.caption || (businessName ? `${businessName} marine service project ${i + 1}` : `Marine service project ${i + 1}`)}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              alt={item.caption || (businessName ? `${businessName} project ${i + 1}` : `Project ${i + 1}`)}
+              width={400} height={300}
+              className="object-cover"
               unoptimized
               onError={() => markFailed(item.src)}
             />
-            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end rounded-xl">
-              <p className="text-white font-sans text-sm font-medium px-4 py-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                {item.caption}
-              </p>
-            </div>
-            <div className="absolute top-3 right-3 w-8 h-8 bg-gold/80 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-white text-xs">&#8853;</span>
-            </div>
+            <span>{item.caption}</span>
           </button>
         ))}
         {visibleVideos.map((v, i) => (
-          <button
-            key={`video-${v.src}`}
-            onClick={() => setIndex(visibleItems.length + i)}
-            className="relative aspect-video w-full overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold mb-3 break-inside-avoid block rounded-xl"
-          >
-            <VideoThumbnail
-              src={v.src}
-              poster={v.poster || undefined}
-              alt={v.caption || `Video ${i + 1}`}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-14 h-14 bg-white/80 rounded-full flex items-center justify-center shadow-lg group-hover:bg-white transition-colors">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 text-navy ml-1">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end rounded-xl">
-              <p className="text-white font-sans text-sm font-medium px-4 py-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                {v.caption}
-              </p>
-            </div>
+          <button key={`video-${v.src}`} onClick={() => setIndex(visibleItems.length + i)} style={{ cursor: 'pointer', border: 'none', background: 'none', padding: 0 }}>
+            <span>▶ {v.caption || `Video ${i + 1}`}</span>
           </button>
         ))}
       </div>
@@ -195,12 +108,8 @@ export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGri
         plugins={[Captions, Video]}
         video={{ autoPlay: true, controls: true, playsInline: true }}
         styles={{
-          container: { backgroundColor: 'rgba(14, 26, 45, 0.97)' },
-          root: {
-            '--yarl__slide_captions_container_background': 'rgba(0,0,0,0.5)',
-            '--yarl__slide_max_width': '92vw',
-            '--yarl__slide_max_height': '92vh',
-          } as Record<string, string>,
+          container: { backgroundColor: 'rgba(0, 0, 0, 0.95)' },
+          root: { '--yarl__slide_captions_container_background': 'rgba(0,0,0,0.5)', '--yarl__slide_max_width': '92vw', '--yarl__slide_max_height': '92vh' } as Record<string, string>,
         }}
       />
     </>
