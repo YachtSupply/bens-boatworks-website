@@ -1,9 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { FiMenu, FiX, FiPhone, FiArrowRight } from 'react-icons/fi';
-import { siteConfig } from '@/site.config';
+import { FiMenu, FiX, FiPhone } from 'react-icons/fi';
+import { Logo } from './Logo';
 
 const ALL_LINKS = [
   { href: '/', label: 'Home' },
@@ -27,91 +26,52 @@ export function Navbar({ logoUrl, name, hasPortfolio = false, hasUpdates = false
   const links = ALL_LINKS.filter((l) => !l.requires || flags[l.requires]);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const displayName = name || siteConfig.name;
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60);
-    handler();
+    const handler = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handler);
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white shadow-lg shadow-black/5'
-          : 'bg-transparent'
+          ? 'bg-white shadow-md border-b border-gold/20'
+          : 'bg-white/95 backdrop-blur-sm border-b border-gold/10'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            {logoUrl ? (
-              <Image
-                src={logoUrl}
-                alt={displayName}
-                width={40}
-                height={40}
-                className="rounded-xl object-cover flex-shrink-0"
-                unoptimized
-              />
-            ) : (
-              <span
-                className={`flex items-center justify-center w-10 h-10 rounded-xl font-heading font-bold text-base flex-shrink-0 transition-colors ${
-                  scrolled ? 'bg-navy text-white' : 'bg-white/20 text-white'
-                }`}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-18 py-3">
+          <Logo logoUrl={logoUrl} name={name} />
+          <div className="hidden md:flex items-center gap-6">
+            {phone && (
+              <a
+                href={`tel:${phone.replace(/\D/g, '')}`}
+                className="flex items-center gap-1.5 text-sm font-sans font-medium text-navy hover:text-gold transition-colors whitespace-nowrap"
               >
-                {displayName.charAt(0)}
-              </span>
+                <FiPhone size={14} className="text-gold" />
+                {phone}
+              </a>
             )}
-            <span className={`font-heading font-bold text-lg tracking-tight transition-colors ${
-              scrolled ? 'text-navy' : 'text-white'
-            }`}>
-              {displayName}
-            </span>
-          </Link>
-
-          {/* Desktop links — centered */}
-          <div className="hidden lg:flex items-center gap-8">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[2px] after:bg-gold after:rounded after:scale-x-0 after:transition-transform hover:after:scale-x-100 ${
-                  scrolled ? 'text-navy/70 hover:text-navy' : 'text-white/70 hover:text-white'
-                }`}
+                className="text-sm font-sans font-medium text-navy hover:text-gold transition-colors tracking-wide uppercase"
               >
                 {l.label}
               </Link>
             ))}
-          </div>
-
-          {/* Right side */}
-          <div className="hidden lg:flex items-center gap-5">
-            {phone && (
-              <a
-                href={`tel:${phone.replace(/\D/g, '')}`}
-                className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                  scrolled ? 'text-navy/60 hover:text-navy' : 'text-white/60 hover:text-white'
-                }`}
-              >
-                <FiPhone size={14} />
-                {phone}
-              </a>
-            )}
             <Link
               href="/contact"
-              className="btn-gold flex items-center gap-2 px-5 py-2.5 text-sm whitespace-nowrap"
+              className="bg-navy text-white text-sm font-sans font-semibold px-6 py-2.5 border border-gold/40 hover:bg-navy/80 hover:border-gold transition-all tracking-wide uppercase whitespace-nowrap"
             >
-              Get a Quote <FiArrowRight size={14} />
+              Request Quote
             </Link>
           </div>
-
-          {/* Mobile toggle */}
           <button
-            className={`lg:hidden p-2 transition-colors ${scrolled ? 'text-navy' : 'text-white'}`}
+            className="md:hidden p-2 text-navy"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -119,27 +79,24 @@ export function Navbar({ logoUrl, name, hasPortfolio = false, hasUpdates = false
           </button>
         </div>
       </div>
-
-      {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden bg-white border-t border-cream-dark px-5 py-6 flex flex-col gap-4 shadow-xl">
+        <div className="md:hidden border-t border-gold/20 bg-white px-4 py-6 flex flex-col gap-5 whitespace-nowrap">
           {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-navy py-1.5"
+              className="text-sm font-sans font-medium text-navy uppercase tracking-wide"
               onClick={() => setOpen(false)}
             >
               {l.label}
             </Link>
           ))}
-          {phone && (
-            <a href={`tel:${phone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-sm text-navy/60 py-1.5">
-              <FiPhone size={14} /> {phone}
-            </a>
-          )}
-          <Link href="/contact" className="btn-gold text-center px-6 py-3 mt-2" onClick={() => setOpen(false)}>
-            Get a Quote
+          <Link
+            href="/contact"
+            className="bg-navy text-white text-sm font-semibold px-6 py-3 text-center border border-gold/40 uppercase tracking-wide whitespace-nowrap"
+            onClick={() => setOpen(false)}
+          >
+            Request Quote
           </Link>
         </div>
       )}
