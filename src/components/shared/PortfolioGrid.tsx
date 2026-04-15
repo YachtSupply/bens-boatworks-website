@@ -56,11 +56,10 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
         if (ctx) {
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-          // Only use if canvas isn't blank (cross-origin frames produce blank)
           if (dataUrl !== 'data:,') setThumb(dataUrl);
         }
       } catch {
-        // CORS or security error — leave thumb as null, dark bg shows
+        // CORS or security error
       }
     };
 
@@ -91,11 +90,20 @@ function VideoThumbnail({ src, poster, alt }: { src: string; poster?: string; al
     );
   }
 
-  // Fallback: dark gradient background (better than plain black)
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-navy to-navy/80" />
   );
 }
+
+/* Varied aspect ratios for masonry visual interest */
+const ASPECT_CLASSES = [
+  'aspect-[4/5]',
+  'aspect-[3/2]',
+  'aspect-square',
+  'aspect-[2/3]',
+  'aspect-[3/4]',
+  'aspect-[16/9]',
+];
 
 export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGridProps) {
   const [index, setIndex] = useState(-1);
@@ -125,12 +133,13 @@ export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGri
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
+      {/* Masonry layout via CSS columns */}
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
         {visibleItems.map((item, i) => (
           <button
             key={item.src}
             onClick={() => setIndex(i)}
-            className="relative aspect-[4/3] overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold"
+            className={`relative ${ASPECT_CLASSES[i % ASPECT_CLASSES.length]} w-full overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold mb-3 break-inside-avoid block rounded-xl`}
           >
             <Image
               src={item.src}
@@ -141,13 +150,13 @@ export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGri
               unoptimized
               onError={() => markFailed(item.src)}
             />
-            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end">
+            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end rounded-xl">
               <p className="text-white font-sans text-sm font-medium px-4 py-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 {item.caption}
               </p>
             </div>
-            <div className="absolute top-3 right-3 w-8 h-8 bg-gold/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-white text-xs">⊕</span>
+            <div className="absolute top-3 right-3 w-8 h-8 bg-gold/80 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-white text-xs">&#8853;</span>
             </div>
           </button>
         ))}
@@ -155,7 +164,7 @@ export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGri
           <button
             key={`video-${v.src}`}
             onClick={() => setIndex(visibleItems.length + i)}
-            className="relative aspect-[4/3] overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold"
+            className="relative aspect-video w-full overflow-hidden group cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold mb-3 break-inside-avoid block rounded-xl"
           >
             <VideoThumbnail
               src={v.src}
@@ -169,13 +178,10 @@ export function PortfolioGrid({ items, videos = [], businessName }: PortfolioGri
                 </svg>
               </div>
             </div>
-            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end">
+            <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/50 transition-all duration-300 flex items-end rounded-xl">
               <p className="text-white font-sans text-sm font-medium px-4 py-3 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                 {v.caption}
               </p>
-            </div>
-            <div className="absolute top-3 right-3 w-8 h-8 bg-gold/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-white text-xs">⊕</span>
             </div>
           </button>
         ))}

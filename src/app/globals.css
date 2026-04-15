@@ -374,3 +374,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+
+/* ── Smooth scroll anchor offset ── */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ── Hide scrollbar for horizontal scroll strips ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

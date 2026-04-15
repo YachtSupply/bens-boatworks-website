@@ -36,113 +36,113 @@ export function Navbar({ logoUrl, name, hasPortfolio = false, hasUpdates = false
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-white shadow-lg shadow-black/5'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-5 sm:px-8">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            {logoUrl ? (
-              <Image
-                src={logoUrl}
-                alt={displayName}
-                width={40}
-                height={40}
-                className="rounded-xl object-cover flex-shrink-0"
-                unoptimized
-              />
-            ) : (
-              <span
-                className={`flex items-center justify-center w-10 h-10 rounded-xl font-heading font-bold text-base flex-shrink-0 transition-colors ${
-                  scrolled ? 'bg-navy text-white' : 'bg-white/20 text-white'
-                }`}
-              >
-                {displayName.charAt(0)}
-              </span>
-            )}
-            <span className={`font-heading font-bold text-lg tracking-tight transition-colors ${
-              scrolled ? 'text-navy' : 'text-white'
-            }`}>
-              {displayName}
-            </span>
-          </Link>
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
-          {/* Desktop links — centered */}
-          <div className="hidden lg:flex items-center gap-8">
-            {links.map((l) => (
+  return (
+    <>
+      {/* Minimal header — logo + menu icon only */}
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled && !open
+            ? 'bg-white shadow-lg shadow-black/5'
+            : 'bg-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="flex items-center justify-between h-20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group">
+              {logoUrl ? (
+                <Image
+                  src={logoUrl}
+                  alt={displayName}
+                  width={40}
+                  height={40}
+                  className="rounded-xl object-cover flex-shrink-0"
+                  unoptimized
+                />
+              ) : (
+                <span
+                  className={`flex items-center justify-center w-10 h-10 rounded-xl font-heading font-bold text-base flex-shrink-0 transition-colors ${
+                    scrolled && !open ? 'bg-navy text-white' : 'bg-white/20 text-white'
+                  }`}
+                >
+                  {displayName.charAt(0)}
+                </span>
+              )}
+              <span className={`font-heading font-bold text-lg tracking-tight transition-colors ${
+                scrolled && !open ? 'text-navy' : 'text-white'
+              }`}>
+                {displayName}
+              </span>
+            </Link>
+
+            {/* Menu toggle */}
+            <button
+              className={`p-2 transition-colors ${
+                scrolled && !open ? 'text-navy hover:text-gold' : 'text-white hover:text-gold'
+              }`}
+              onClick={() => setOpen(!open)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+            >
+              {open ? <FiX size={24} /> : <FiMenu size={24} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Full-screen overlay menu */}
+      <div
+        className={`fixed inset-0 z-40 bg-navy pt-20 flex flex-col transition-all duration-500 ease-in-out ${
+          open ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+      >
+        <div className="flex-1 flex items-center justify-center">
+          <nav className="flex flex-col items-center gap-2">
+            {links.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`text-sm font-medium transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[2px] after:bg-gold after:rounded after:scale-x-0 after:transition-transform hover:after:scale-x-100 ${
-                  scrolled ? 'text-navy/70 hover:text-navy' : 'text-white/70 hover:text-white'
+                className={`font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white/30 hover:text-gold transition-all duration-300 py-1 ${
+                  open ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                 }`}
+                style={{ transitionDelay: open ? `${100 + i * 60}ms` : '0ms' }}
+                onClick={() => setOpen(false)}
               >
                 {l.label}
               </Link>
             ))}
-          </div>
-
-          {/* Right side */}
-          <div className="hidden lg:flex items-center gap-5">
-            {phone && (
-              <a
-                href={`tel:${phone.replace(/\D/g, '')}`}
-                className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                  scrolled ? 'text-navy/60 hover:text-navy' : 'text-white/60 hover:text-white'
-                }`}
-              >
-                <FiPhone size={14} />
-                {phone}
-              </a>
-            )}
-            <Link
-              href="/contact"
-              className="btn-gold flex items-center gap-2 px-5 py-2.5 text-sm whitespace-nowrap"
-            >
-              Get a Quote <FiArrowRight size={14} />
-            </Link>
-          </div>
-
-          {/* Mobile toggle */}
-          <button
-            className={`lg:hidden p-2 transition-colors ${scrolled ? 'text-navy' : 'text-white'}`}
-            onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
-          >
-            {open ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
+          </nav>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="lg:hidden bg-white border-t border-cream-dark px-5 py-6 flex flex-col gap-4 shadow-xl">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm font-medium text-navy py-1.5"
-              onClick={() => setOpen(false)}
+        <div
+          className={`border-t border-white/10 px-5 sm:px-8 py-6 flex items-center justify-between transition-all duration-300 ${
+            open ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
+          }`}
+          style={{ transitionDelay: open ? '500ms' : '0ms' }}
+        >
+          {phone ? (
+            <a
+              href={`tel:${phone.replace(/\D/g, '')}`}
+              className="flex items-center gap-2 text-white/50 hover:text-gold transition-colors text-sm font-sans"
             >
-              {l.label}
-            </Link>
-          ))}
-          {phone && (
-            <a href={`tel:${phone.replace(/\D/g, '')}`} className="flex items-center gap-2 text-sm text-navy/60 py-1.5">
               <FiPhone size={14} /> {phone}
             </a>
+          ) : (
+            <span />
           )}
-          <Link href="/contact" className="btn-gold text-center px-6 py-3 mt-2" onClick={() => setOpen(false)}>
-            Get a Quote
+          <Link
+            href="/contact"
+            className="btn-gold inline-flex items-center gap-2 px-6 py-3 text-sm whitespace-nowrap"
+            onClick={() => setOpen(false)}
+          >
+            Get a Quote <FiArrowRight size={14} />
           </Link>
         </div>
-      )}
-    </nav>
+      </div>
+    </>
   );
 }
