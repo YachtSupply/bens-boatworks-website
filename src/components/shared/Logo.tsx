@@ -12,7 +12,8 @@ interface LogoProps {
 }
 
 export function Logo({ size = 'md', inverted = false, logoUrl, name }: LogoProps) {
-  const imgSize = { sm: 40, md: 48, lg: 64 }[size];
+  // Sizes increased by 20%: sm 36→43, md 44→53, lg 56→67
+  const imgSize = { sm: 43, md: 53, lg: 67 }[size];
   const textSize = { sm: 'text-lg', md: 'text-xl', lg: 'text-2xl' }[size];
   const src = logoUrl ?? '';
   const displayName = name || siteConfig.name;
@@ -41,15 +42,15 @@ export function Logo({ size = 'md', inverted = false, logoUrl, name }: LogoProps
           alt={displayName}
           width={imgSize}
           height={imgSize}
-          className={`flex-shrink-0 ${isCircle ? 'rounded-xl object-cover' : 'rounded-xl object-contain'}`}
+          className={`flex-shrink-0 ${isCircle ? 'rounded-full object-cover' : 'rounded-[8px] object-contain'}`}
           unoptimized
           onLoad={handleLoad}
           onError={handleError}
         />
       ) : (
         <span
-          className={`flex items-center justify-center rounded-xl flex-shrink-0 font-heading font-bold ${
-            inverted ? 'bg-gold text-white' : 'bg-navy text-white'
+          className={`flex items-center justify-center rounded-full flex-shrink-0 font-serif font-bold ${
+            inverted ? 'bg-gold text-navy' : 'bg-navy text-white'
           }`}
           style={{ width: imgSize, height: imgSize, fontSize: imgSize * 0.4 }}
         >
@@ -57,7 +58,7 @@ export function Logo({ size = 'md', inverted = false, logoUrl, name }: LogoProps
         </span>
       )}
       <span
-        className={`font-heading font-bold tracking-tight ${textSize} ${
+        className={`font-serif font-bold tracking-tight ${textSize} ${
           inverted ? 'text-white' : 'text-navy'
         } group-hover:text-gold transition-colors`}
       >
