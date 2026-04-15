@@ -6,7 +6,7 @@
 // for each deployed site.
 // ============================================================
 
-export const TEMPLATE_VERSION = '1.1.17';
+export const TEMPLATE_VERSION = '1.1.26';
 
 export type BoatworkEventType =
   | 'profile.updated'
@@ -33,22 +33,22 @@ export interface OutboundWebhookConfig {
 
 export const siteConfig = {
   // ── Core business info ────────────────────────────────────
-  name: 'Ben\'s Boatworks ',
-  tagline: 'Born in the water ',
+  name: 'Marine Pro',
+  tagline: 'Expert Yacht & Marine Services',
   description: 'Professional yacht management and marine repair services delivered with precision and care.',
   about: 'Marine Pro is a full-service marine contractor specializing in yacht management, repairs, and maintenance. Our experienced team delivers quality workmanship on every job.',
-  phone: '(555) 555-5555',
-  email: 'jruytenbeek@gmail.com',
+  phone: '(555) 555-0100',
+  email: 'info@marinepro.example.com',
   address: '123 Marina Way, Fort Lauderdale, FL 33316',
   location: '123 Marina Way, Fort Lauderdale, FL 33316',
-  city: 'Annapolis',
-  state: 'MD',
-  logoUrl: 'https://boatwork-images.s3.us-east-1.amazonaws.com/52890708-685a-4a15-bd2f-b3847385b8bd.jpg',
+  city: 'Fort Lauderdale',
+  state: 'FL',
+  logoUrl: '',
 
   // ── Boatwork integration ──────────────────────────────────
   boatwork: {
-    profileSlug: 'bens-boatworks',
-    profileId: 'e9bee299-0a52-4ff0-8b2b-55f218bf6c0f', // UUID — set during provisioning, permanent link to profile
+    profileSlug: 'template',
+    profileId: '', // UUID — set during provisioning, permanent link to profile
     profileUrl: 'https://boatwork.co/pro/template/',
     logoUrl: '/boatwork-logo.svg',
     useLiveReviews: false,

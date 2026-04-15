@@ -15,13 +15,8 @@ const config: Config = {
         'cream-dark': 'rgb(var(--color-bg-dark-rgb) / <alpha-value>)',
       },
       fontFamily: {
-        serif: ['var(--font-heading)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
-        heading: ['var(--font-heading)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-      },
-      borderRadius: {
-        'xl': '12px',
-        '2xl': '16px',
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
+        sans: ['var(--font-lato)', 'system-ui', 'sans-serif'],
       },
     },
   },
