@@ -1,18 +1,19 @@
 export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import { getSiteData } from '@/lib/siteData';
+import { requireSiteUrl } from '@/lib/config';
 import { formatPhone } from '@/lib/phoneUtils';
 import { ContactForm, BoatworkBadge } from '@/components/shared';
 import { Phone, Mail, MapPin, Clock, ArrowUpRight } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = await getSiteData();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const siteUrl = requireSiteUrl();
   const apiSeo = siteConfig.apiSeo;
   return {
     title: apiSeo?.titles?.contact ?? `Contact ${siteConfig.name} | Get a Quote — ${siteConfig.city}, ${siteConfig.state}`,
     description: apiSeo?.metaDescriptions?.contact ?? `Contact ${siteConfig.name} in ${siteConfig.city}, ${siteConfig.state}. ${siteConfig.phone ? `Call ${siteConfig.phone} or r` : 'R'}equest a quote online.`,
-    alternates: { canonical: apiSeo?.canonicals?.contact ?? (siteUrl ? `${siteUrl}/contact` : '/contact') },
+    alternates: { canonical: apiSeo?.canonicals?.contact ?? `${siteUrl}/contact` },
   };
 }
 

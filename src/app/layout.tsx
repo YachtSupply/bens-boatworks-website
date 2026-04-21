@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { getSiteData } from '@/lib/siteData';
-import { getProfileSlug } from '@/lib/config';
+import { getProfileSlug, requireSiteUrl } from '@/lib/config';
 import { Navbar, Footer } from '@/components/shared';
 import './globals.css';
 
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: data.seo.description,
     keywords: data.seo.keywords,
     alternates: {
-      canonical: process.env.NEXT_PUBLIC_SITE_URL ?? '/',
+      canonical: requireSiteUrl(),
     },
   };
 }

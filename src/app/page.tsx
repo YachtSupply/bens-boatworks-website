@@ -3,23 +3,24 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Phone, MapPin, ArrowRight, Clock, ArrowUpRight } from 'lucide-react';
 import { getSiteData } from '@/lib/siteData';
+import { requireSiteUrl } from '@/lib/config';
 import { formatPhone } from '@/lib/phoneUtils';
 import { ReviewCard, ReviewSynopsis, PortfolioGrid, ServiceAreaMap, ServiceCard, UpdatesFeed, ContactForm } from '@/components/shared';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteData = await getSiteData();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const siteUrl = requireSiteUrl();
   const apiSeo = siteData.apiSeo;
   const serviceNames = siteData.services.slice(0, 3).map((s) => s.name).join(', ');
   const title = apiSeo?.titles?.homepage ?? `${siteData.name} — Marine Services in ${siteData.city}, ${siteData.state}`;
   const description = apiSeo?.metaDescriptions?.homepage ?? `${siteData.name} provides ${serviceNames} in ${siteData.city}, ${siteData.state}. Request a quote today.`;
-  const canonical = apiSeo?.canonicals?.homepage ?? (siteUrl || '/');
+  const canonical = apiSeo?.canonicals?.homepage ?? siteUrl;
   return { title, description, alternates: { canonical } };
 }
 
 export default async function HomePage() {
   const siteConfig = await getSiteData();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const siteUrl = requireSiteUrl();
   const reviews = siteConfig.boatwork.staticReviews;
   const phone = formatPhone(siteConfig.phone);
   const hasPortfolio = siteConfig.portfolio.length > 0 || siteConfig.videos.length > 0;

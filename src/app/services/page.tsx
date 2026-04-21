@@ -2,18 +2,19 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getSiteData } from '@/lib/siteData';
+import { requireSiteUrl } from '@/lib/config';
 import { ServiceCard, SafeImage } from '@/components/shared';
 import { ArrowRight, CheckCircle, Anchor } from 'lucide-react';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = await getSiteData();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const siteUrl = requireSiteUrl();
   const apiSeo = siteConfig.apiSeo;
   const serviceList = siteConfig.services.slice(0, 3).map((s) => s.name).join(', ');
   return {
     title: apiSeo?.titles?.services ?? `Marine Services by ${siteConfig.name} | ${siteConfig.city}, ${siteConfig.state}`,
     description: apiSeo?.metaDescriptions?.services ?? `${siteConfig.name} offers ${serviceList}, and more for boat owners in ${siteConfig.city}, ${siteConfig.state}.`,
-    alternates: { canonical: apiSeo?.canonicals?.services ?? (siteUrl ? `${siteUrl}/services` : '/services') },
+    alternates: { canonical: apiSeo?.canonicals?.services ?? `${siteUrl}/services` },
   };
 }
 

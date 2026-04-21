@@ -2,15 +2,16 @@ export const dynamic = 'force-dynamic';
 import type { Metadata } from 'next';
 
 import { getSiteData } from '@/lib/siteData';
+import { requireSiteUrl } from '@/lib/config';
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteConfig = await getSiteData();
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? '';
+  const siteUrl = requireSiteUrl();
   return {
     title: 'Privacy Policy',
     description: `Privacy Policy for ${siteConfig.name}.`,
     alternates: {
-      canonical: siteUrl ? `${siteUrl}/privacy` : '/privacy',
+      canonical: `${siteUrl}/privacy`,
     },
   };
 }
