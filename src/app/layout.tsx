@@ -19,6 +19,11 @@ export const viewport: Viewport = {
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await getSiteData();
+  // SEO-DUP-7b: parked sites must not be indexed. The point of the landing
+  // is to reclaim inbound traffic, not to rank for the contractor's old
+  // queries — we want Google to drop these URLs and keep the marketplace
+  // (/pro/[slug]) as the canonical surface.
+  const isParked = data.parked?.isActive === true;
   return {
     icons: {
       icon: '/favicon.ico',
@@ -28,12 +33,15 @@ export async function generateMetadata(): Promise<Metadata> {
         { rel: 'icon', url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
       ],
     },
-    title: { template: data.seo.titleTemplate, default: data.seo.defaultTitle },
-    description: data.seo.description,
-    keywords: data.seo.keywords,
+    title: isParked
+      ? { absolute: `${data.name} — no longer available` }
+      : { template: data.seo.titleTemplate, default: data.seo.defaultTitle },
+    description: isParked ? `${data.name} is no longer available on Boatwork.` : data.seo.description,
+    keywords: isParked ? undefined : data.seo.keywords,
     alternates: {
       canonical: requireSiteUrl(),
     },
+    ...(isParked && { robots: { index: false, follow: true } }),
   };
 }
 

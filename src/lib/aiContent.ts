@@ -24,6 +24,30 @@ export interface ReviewSynopsisData {
   sources: ('boatwork' | 'google')[];
 }
 
+export interface ParkedSimilarContractor {
+  slug: string;
+  name: string;
+  city: string | null;
+  state: string | null;
+  avatarUrl: string | null;
+  googleRating: number | null;
+  googleReviewCount: number | null;
+  primarySpecialty: string | null;
+  profileUrl: string;
+}
+
+// SEO-DUP-7b: when this block is present with `isActive: true`, the template
+// renders a "this site is no longer available" landing instead of the normal
+// homepage, and layout.tsx flips to robots: { index: false }. Written by
+// boatwork-dev's parkContractor helper when a subscription ends.
+export interface ParkedBlock {
+  isActive: true;
+  message: string;
+  parkedAt: string;
+  similarContractors: ParkedSimilarContractor[];
+  profileUrl: string;
+}
+
 export interface GeneratedContent {
   tagline: string;               // Only used as fallback if profile.tagline is null
   about: string;                 // Enriched about text — voice-preserving + SEO
@@ -37,6 +61,7 @@ export interface GeneratedContent {
   serviceAreaTitle?: string;     // Dynamic section title based on business type
   serviceKeywords: Record<string, string[]>;  // Per-service bullet keywords
   reviewSynopsis?: ReviewSynopsisData;  // AI-synthesized review summary (optional - only if reviews exist)
+  parked?: ParkedBlock;          // SEO-DUP-7b: optional — only present when the contractor's subscription has ended
 }
 
 interface CachedContent {

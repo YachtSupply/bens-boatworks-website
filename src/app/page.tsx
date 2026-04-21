@@ -5,6 +5,7 @@ import { Phone, MapPin, ArrowRight, Clock, ArrowUpRight } from 'lucide-react';
 import { getSiteData } from '@/lib/siteData';
 import { requireSiteUrl } from '@/lib/config';
 import { formatPhone } from '@/lib/phoneUtils';
+import { ParkedLanding } from '@/components/ParkedLanding';
 import { ReviewCard, ReviewSynopsis, PortfolioGrid, ServiceAreaMap, ServiceCard, UpdatesFeed, ContactForm } from '@/components/shared';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,6 +21,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function HomePage() {
   const siteConfig = await getSiteData();
+
+  // SEO-DUP-7b: parked sites render the "no longer available" landing +
+  // similar-pro cross-sells instead of the normal homepage. Early return so
+  // the rest of the page logic (reviews, services, portfolio, etc.) doesn't
+  // get computed for a site that won't render them.
+  if (siteConfig.parked?.isActive) {
+    return <ParkedLanding parked={siteConfig.parked} businessName={siteConfig.name} />;
+  }
+
   const siteUrl = requireSiteUrl();
   const reviews = siteConfig.boatwork.staticReviews;
   const phone = formatPhone(siteConfig.phone);
